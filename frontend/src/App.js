@@ -10,14 +10,17 @@ import {Header, StatusBar} from "./basicComponets"
 import ViewDetails from "./viewDetails"
 import FoodList from "./foodList"
 import Input from "./input"
+import ShoppingList from "./shoppingList"
 
 function SideBar(){
 	return(
 		<div className="side_bar">
-			{/*<AddItem/>
+			<AddItem/>
+			{/*
 			<EmptyList/>
-			<SaveList/>*/}
-			<ViewDetails/>
+			<SaveList/>
+			<ViewDetails/>*/}
+			<ShoppingList/>
 		</div>
 	)
 }
@@ -218,10 +221,11 @@ function App() {
 			<HistoryView/>
 
 			<ShoppingHistory/>
-			<Statistics/>*/}
+			<Statistics/>
+			<Input/>*/}
 			<Header/>
 			<FoodList/>
-			<Input/>
+			<SideBar/>
 			<Modal/>
 		</Fragment>
 	);
