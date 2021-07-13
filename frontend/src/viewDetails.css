@@ -1,0 +1,61 @@
+.viewFoodDetails{
+    grid-row: 1/4;
+    background: #FFFFFF;
+    padding: 28px 44px 34px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.detailsHeading{
+    font-weight: 500;
+    font-size: 12px;color: #C1C1C4;
+    margin: 0 0 12px 0;
+}
+
+.viewFoodDetails .buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    margin: 0 auto;
+}
+
+.buttons *{
+    width: 123px;
+    height: 60px;
+    background: #F9A109;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+}
+
+.buttons .delete{
+    background-color: white;
+    color: #34333A;
+}
+
+.name{
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.category{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.note{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.viewFoodDetails >div:nth-child(1){
+    display: grid;
+    grid-row-gap: 28px;
+}
+
+.viewFoodDetails p{margin: 0;}
