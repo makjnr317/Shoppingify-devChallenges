@@ -1,16 +1,14 @@
 import './App.css';
-import SideNav from "./sideNav"
+import SideNav from "./components/sideNav"
 import { Fragment } from 'react';
-import sauce from "./source.svg"
-import empty from "./undraw_shopping_app_flsj 1.svg"
-import calender from"./event_note_black_24dp (1).svg"
-import click from "./chevron_right_black_24dp.svg"
-import Modal from "./modal"
-import {Header, StatusBar} from "./basicComponets"
-import ViewDetails from "./viewDetails"
-import FoodList from "./foodList"
-import Input from "./input"
-import ShoppingList from "./shoppingList"
+import sauce from "./images/source.svg"
+import empty from "./images/undraw_shopping_app_flsj 1.svg"
+import Modal from "./components/modal"
+import {Header, StatusBar} from "./components/basicComponets"
+import ViewDetails from "./components/viewDetails"
+import FoodList from "./components/foodList"
+import Input from "./components/input"
+import ShoppingList from "./components/shoppingList"
 
 function SideBar(){
 	return(
@@ -88,10 +86,10 @@ function HistoryTab(){
 				<p>Grocery List</p>
 			</div>
 			<div>
-				<img src={calender} alt="calender"/>
+				<span class="material-icons-outlined">event_note</span>
 				<p>Mon 27.8.2020</p>
 				<StatusBar status="cancelled"/>
-				<img src={click} alt="click"/>
+				<span class="material-icons">chevron_right</span>
 			</div>
 		</div>
 	)
@@ -138,7 +136,7 @@ function HistoryView(){
 		<div className="historyView">
 			<h4>Eero’s farewell party</h4>
 			<div className="date">
-				<img src={calender} alt="calender"/>
+			<span class="material-icons-outlined">event_note</span>
 				<p>Mon 27.8.2020</p>
 			</div>
 			<div className="monthTabs">

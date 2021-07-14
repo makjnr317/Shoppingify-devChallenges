@@ -1,6 +1,5 @@
 import React from 'react'
 import "./shoppingList.css"
-import add from "./add_black_24dp.svg"
 
 function ShoppingListItem({count= "3"}){
     return(
@@ -10,11 +9,11 @@ function ShoppingListItem({count= "3"}){
                 <div className="trashBox">
 
                 </div>
-                <img src={add} alt="addItem"/>
+                <span class="material-icons">add</span>
                 <div className="SlistItemCount">
                     {count} pcs
                 </div>
-                <img src={add} alt="addItem"/>
+                <span class="material-icons">add</span>
             </div>
             <div className="SlistItemCount">
                     {count} pcs

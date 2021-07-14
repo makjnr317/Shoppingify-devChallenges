@@ -1,12 +1,11 @@
 import React from 'react'
-import add from "./add_black_24dp.svg"
 import "./food_item.css"
 
 function FoodItem({text}) {
     return (
         <div className="food_item">
             {text}
-            <img src={add} alt="add item"/>
+			<span class="material-icons">add</span>
         </div>
     )
 }

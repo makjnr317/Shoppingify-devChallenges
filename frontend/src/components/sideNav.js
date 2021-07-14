@@ -1,8 +1,6 @@
 import React from 'react'
-import logo from "./logo.svg" 
-import svg2 from "./ic_replay_24px.svg"
-import svg1 from "./ic_list_24px.svg"
-import cart from "./shopping_cart_white_24dp.svg"
+import logo from "../images/logo.svg" 
+import "./sideNav.css"
 
 export default function SideNav() {
     return (
@@ -13,22 +11,23 @@ export default function SideNav() {
             <div className="menu">
                 <div className="menu-item">
                     <div className="menu-bar"/>
-                    <img src={svg1} alt="svg-1"/>
+                        <span class="material-icons">list</span>
                     <div/>
                 </div>
                 <div className="menu-item">
                     <div className="menu-bar"/>
-                    <img src={svg2} alt="svg-2"/>
+                        <span class="material-icons">replay</span>
                     <div/>
                 </div>
                 <div className="menu-item">
                     <div className="menu-bar"/>
+                        <span class="material-icons">poll</span>
                     <div/>
                 </div>
             </div>
             <div className="cart">
                 <div className="shoppingCart">
-                    <img src={cart} alt="cart"/>
+                <span class="material-icons" style={{color:"white"}}>shopping_cart</span>
                 </div>
             </div>
         </div>
