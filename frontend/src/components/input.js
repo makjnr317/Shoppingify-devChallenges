@@ -21,11 +21,14 @@ export default function Input(){
                     </div>
                     <div>
                         <label for="category">Category</label>
-                        <select name="category" id="category">
-                            <option value="Avocado">Avocado</option>
-                            <option>Avocado</option>
-                            <option>Avocado</option>
-                        </select>
+                        <input type="text" name="category" id="category" placeholder="Enter a category"/>
+                        <div className="categoryOptions">
+                            <div className="option">Fruits</div>
+                            <div className="option">Cereals</div>
+                            <div className="option">Cereals</div>
+                            <div className="option">Vegetables</div>
+                            <div className="option">Vegetables</div>
+                        </div>
                     </div>
                 </form>
             </div>

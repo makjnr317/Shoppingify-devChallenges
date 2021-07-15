@@ -12,11 +12,3 @@ export function Header(){
 	)
 }
 
-export function StatusBar({status}){
-	const cancel = status === "cancelled"
-	return(
-		<div className={`status ${cancel && 'cancelled'}`} >
-			Completed
-		</div>
-	)
-}

@@ -1,0 +1,67 @@
+.shoppingHistoryHeader{
+    font-weight: 700;
+    font-size: 26px;
+    color: #34333A;
+    margin: 0 0 40px 0;
+}
+
+.monthHitoryHeader{
+    font-weight: 500;
+    font-size: 12px;
+    color: #000000;
+    margin: 0 0 17px 0;
+}
+
+.historyTab{
+    height: 64px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 0 21px;
+}
+
+.tabName{
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+}
+
+.tabs{
+    display: grid;
+    grid-row-gap: 28px;
+}
+
+.monthTabs{
+    display: grid;
+    grid-row-gap: 54px;
+}
+
+.historyTab>div:nth-child(2){
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.historyTab>div:nth-child(2) p{
+    font-weight: 500;
+    color: #C1C1C4;
+    font-size: 12px;
+}
+
+.status{
+    padding: 4.5px 7.8px;
+    color: #56CCF2;
+    border: 1px solid #56CCF2;
+    border-radius: 8px;
+    font-size: 12px;
+    height: min-content;
+}
+
+.cancelled{
+    color:#EB5757 !important;
+    border-color:#EB5757 !important;
+}

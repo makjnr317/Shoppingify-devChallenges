@@ -1,14 +1,16 @@
 import './App.css';
 import SideNav from "./components/sideNav"
-import { Fragment } from 'react';
 import sauce from "./images/source.svg"
 import empty from "./images/undraw_shopping_app_flsj 1.svg"
 import Modal from "./components/modal"
-import {Header, StatusBar} from "./components/basicComponets"
+import {Header} from "./components/basicComponets"
 import ViewDetails from "./components/viewDetails"
 import FoodList from "./components/foodList"
 import Input from "./components/input"
 import ShoppingList from "./components/shoppingList"
+import { BrowserRouter as Router } from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
+import ShoppingHistory from "./components/ShopingHistory"
 
 function SideBar(){
 	return(
@@ -66,47 +68,6 @@ function SaveList(){
 }
 
 
-function ShoppingHistory(){
-	return(
-		<div className="shoppingHistory">
-			<h3 className="shoppingHistoryHeader">Shopping history</h3>
-			<div className="monthTabs">
-				<MonthHistory/>
-				<MonthHistory/>
-			</div>
-		</div>
-	)
-}
-
-
-function HistoryTab(){
-	return(
-		<div className="historyTab">
-			<div className="tabName">
-				<p>Grocery List</p>
-			</div>
-			<div>
-				<span class="material-icons-outlined">event_note</span>
-				<p>Mon 27.8.2020</p>
-				<StatusBar status="cancelled"/>
-				<span class="material-icons">chevron_right</span>
-			</div>
-		</div>
-	)
-}
-
-function MonthHistory(){
-	return(
-		<div className="monthHitory">
-			<h4 className="monthHitoryHeader">August 2020</h4>
-			<div className="tabs">
-				<HistoryTab/>
-				<HistoryTab/>
-			</div>
-		</div>
-	)
-}
-
 function HistoryFoodCategory({category}){
 	return(
 		<div className="category">
@@ -146,7 +107,6 @@ function HistoryView(){
 		</div>
 	)
 }
-
 
 function StatsRow(){
 	return(
@@ -209,23 +169,32 @@ function Statistics(){
 	)
 }
 
-
-
 function App() {
 	return (
-		<Fragment>
-			<SideNav/>
+		<>
 			{/*
 			<HistoryView/>
-
-			<ShoppingHistory/>
-			<Statistics/>
-			<Input/>*/}
-			<Header/>
-			<FoodList/>
-			<SideBar/>
+			<ViewDetails/>
+			*/}
+			<Router>
+				<SideNav/>
+				<Switch>
+					<Route exact path="/">
+						<Header/>
+						<FoodList/>
+					</Route>
+					<Route path="/history">
+						<ShoppingHistory/>
+					</Route>
+					<Route path="/statistics">
+						<Statistics/>
+					</Route>
+				</Switch>
+			</Router>
+			
+			<Input/>
 			<Modal/>
-		</Fragment>
+		</>
 	);
 }
 
