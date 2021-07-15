@@ -1,11 +1,11 @@
 import React from 'react'
-import "./food_item.css"
+import "./foodList.css"
 
 function FoodItem({text}) {
     return (
         <div className="food_item">
             {text}
-			<span class="material-icons">add</span>
+			<span class="material-icons add-icon">add</span>
         </div>
     )
 }

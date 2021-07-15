@@ -1,0 +1,37 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+header h1{
+    font-weight: 500;
+    width: 450px;
+    font-size: 26px;
+}
+
+header span{
+    color: #F9A109;
+    font-size: 32px;
+}
+
+.search{
+    width: 276px;
+    height: 51px;
+    box-shadow: 0px 2px 12px rgb(94 48 48 / 4%);
+    border-radius: 12px;
+    background: white;
+    margin-top: 27px;
+    display: flex;
+    padding: 16px 14px 15px 19px;
+    justify-content: space-between;
+}
+
+.search span{
+    color: #34333A;
+}
+
+.search input{
+    border:none;
+    width: 212px;
+}
