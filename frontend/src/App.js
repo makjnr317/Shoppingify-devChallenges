@@ -21,6 +21,7 @@ function SideBar(){
 			<SaveList/>
 			<ViewDetails/>*/}
 			<ShoppingList/>
+			<SaveList/>
 		</div>
 	)
 }
@@ -192,7 +193,7 @@ function App() {
 				</Switch>
 			</Router>
 			
-			<Input/>
+			<SideBar/>
 			<Modal/>
 		</>
 	);
