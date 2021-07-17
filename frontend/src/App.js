@@ -1,7 +1,5 @@
 import './App.css';
 import SideNav from "./components/sideNav"
-import sauce from "./images/source.svg"
-import empty from "./images/undraw_shopping_app_flsj 1.svg"
 import Modal from "./components/modal"
 import {Header} from "./components/header"
 import ViewDetails from "./components/viewDetails"
@@ -11,59 +9,16 @@ import ShoppingList from "./components/shoppingList"
 import { BrowserRouter as Router } from 'react-router-dom'
 import {Route, Switch} from 'react-router-dom'
 import ShoppingHistory from "./components/ShopingHistory"
+import Statistics from "./components/statistics"
 
 function SideBar(){
 	return(
 		<div className="side_bar">
-			<AddItem/>
 			{/*
-			<EmptyList/>
-			<SaveList/>
-			<ViewDetails/>*/}
-			<ShoppingList/>
-			<SaveList/>
-		</div>
-	)
-}
-
-function AddItem(){
-	return(
-		<div className="add_item">
-			<div>
-				<img src={sauce} alt="sauce"/>
-			</div>
-			<div>
-				<p>Didn’t find what you need?</p>
-				<div className="add_item_button">
-					<span>Add Item</span>
-				</div>
-			</div>
-		</div>
-	)
-}
-
-function EmptyList(){
-	return(
-		<div className="empty_list">
-			<div/>
-			<p>No items</p>
-			<figure>
-				<img src={empty} alt="empty cart"/>
-			</figure>
-		</div>
-
-	)
-}
-
-function SaveList(){
-	return(
-		<div className="SaveList">
-			<div className="ListNameSave">
-				<input type="text" placeholder="Enter a name"/>
-				<div className="SaveListButton">
-					Save
-				</div>
-			</div>
+				
+			<ViewDetails/>
+			<ShoppingList/>*/}
+			<Input/>
 		</div>
 	)
 }
@@ -96,9 +51,13 @@ function FoodItemCount({text}) {
 function HistoryView(){
 	return(
 		<div className="historyView">
+			<div className="back">
+				<span class="material-icons">trending_flat</span>
+				<p>back</p>
+			</div>
 			<h4>Eero’s farewell party</h4>
 			<div className="date">
-			<span class="material-icons-outlined">event_note</span>
+			<span class="material-icons event_note">event_note</span>
 				<p>Mon 27.8.2020</p>
 			</div>
 			<div className="monthTabs">
@@ -109,66 +68,6 @@ function HistoryView(){
 	)
 }
 
-function StatsRow(){
-	return(
-		<div className="statsRow">
-			<div>
-				<p>Banana</p>
-				<p>20%</p>
-			</div>
-			<div className="background">
-				<div className="value"></div>
-			</div>
-		</div>
-	)
-}
-
-
-function Stats(){
-	return(
-		<div>
-			<StatsRow/>
-			<StatsRow/>
-			<StatsRow/>
-		</div>
-	)
-}
-
-function TopItems(){
-	return(
-		<div className="topItems">
-			<h4 className="statsHeader">Top Items</h4>
-			<Stats/>
-		</div>
-	)
-}
-
-function TopCategories(){
-	return(
-		<div className="topCategories">
-			<h4 className="statsHeader">Top Categories</h4>
-			<Stats/>
-		</div>
-	)
-}
-
-function Chart(){
-	return(
-		<div>
-			
-		</div>
-	)
-}
-
-function Statistics(){
-	return(
-		<div className="statistics">
-			<TopItems/>
-			<TopCategories/>
-			<Chart/>
-		</div>
-	)
-}
 
 function App() {
 	return (
@@ -185,7 +84,8 @@ function App() {
 						<FoodList/>
 					</Route>
 					<Route path="/history">
-						<ShoppingHistory/>
+						{/*<ShoppingHistory/>*/}
+						<HistoryView/>
 					</Route>
 					<Route path="/statistics">
 						<Statistics/>

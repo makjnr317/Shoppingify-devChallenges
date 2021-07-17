@@ -16,7 +16,6 @@
     padding: 0 27px 0 45px;
     height: -webkit-fill-available;
     height: -moz-available;
-    max-height: 370px;
     overflow-y: auto;
 }
 
@@ -126,3 +125,37 @@
     height: 20px;
 }
 
+
+.ListNameSave{
+    width: 309.89px;
+    height: 61.25px;
+    border: 2px solid #F9A109;
+    box-sizing: border-box;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    left: 40px;
+}
+
+.ListNameSave input {
+    border:none;
+    border-radius: 12px 0 0 12px;
+    width: 206px;
+    padding: 0 0 0 16px;
+}
+
+.SaveListButton{
+    background: #F9A109;
+    border-radius: 0 8px 8px 0;;
+    width: 95px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SaveList{
+    padding: 17px 0;
+    background: white;
+}

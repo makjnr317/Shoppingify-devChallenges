@@ -1,5 +1,38 @@
 import React from 'react'
 import "./shoppingList.css"
+import sauce from "../images/source.svg"
+import empty from "../images/undraw_shopping_app_flsj 1.svg"
+
+
+function AddItem(){
+	return(
+		<div className="add_item">
+			<div>
+				<img src={sauce} alt="sauce"/>
+			</div>
+			<div>
+				<p>Didn’t find what you need?</p>
+				<div className="add_item_button">
+					<span>Add Item</span>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+function SaveList(){
+	return(
+		<div className="SaveList">
+			<div className="ListNameSave">
+				<input type="text" placeholder="Enter a name"/>
+				<div className="SaveListButton">
+					Save
+				</div>
+			</div>
+		</div>
+	)
+}
+
 
 function ShoppingListItem({inde, count= "3", edit=!true}){
     var dynamicElement = `.modifyCount-${inde}`
@@ -60,12 +93,24 @@ function ShoppingListCategory({index}){
                 <ShoppingListItem inde={`${index}-0`}/>
                 <ShoppingListItem inde={`${index}-1`}/>
             </div>
-            
         </div>
     )
 }
 
-export default function ShoppingList(){
+function EmptyList(){
+	return(
+		<div className="empty_list">
+			<div/>
+			<p>No items</p>
+			<figure>
+				<img src={empty} alt="empty cart"/>
+			</figure>
+		</div>
+
+	)
+}
+
+function NonEmptyList(){
     return(
         <div className="shoppingList">
             <div className="shoppingListHeader">
@@ -78,5 +123,16 @@ export default function ShoppingList(){
                 <ShoppingListCategory index ="2"/>
             </div>
         </div>
+    )
+}
+
+export default function ShoppingList(){
+    var empty = false
+    return(
+        <>
+            <AddItem/>
+            {(empty)? <EmptyList/>: <NonEmptyList/>}
+            <SaveList empty={empty}/> 
+        </>
     )
 }

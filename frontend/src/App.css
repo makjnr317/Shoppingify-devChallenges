@@ -20,18 +20,18 @@ body{
 div#root{
     height: 100%;
     display: grid;
-    grid-template: 103px auto /88px minmax(100px,auto) 370px;
+    
+    grid-template: 103px calc(100% - 148px) /88px minmax(100px,auto) 370px;
     grid-column-gap: 60px;
     grid-row-gap: 45px;
 }
 
 
 .side_bar{
-    grid-row: 1/4;
+    grid-row: 1/3;
     background: #FFF0DE;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 
@@ -43,7 +43,7 @@ div#root{
     display: flex;
     padding: 18px 18px 19px 15px;
     justify-content: space-between;
-    margin:44px 25px 0 40px;
+    margin:33px 25px 0 40px;
 }
 
 
@@ -83,39 +83,6 @@ div#root{
     height: -webkit-fill-available;
 }
 
-.ListNameSave{
-    width: 309.89px;
-    height: 61.25px;
-    border: 2px solid #F9A109;
-    box-sizing: border-box;
-    border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    left: 40px;
-}
-
-.ListNameSave input {
-    border:none;
-    border-radius: 12px 0 0 12px;
-    width: 206px;
-    padding: 0 0 0 16px;
-}
-
-.SaveListButton{
-    background: #F9A109;
-    border-radius: 0 8px 8px 0;;
-    width: 95px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.SaveList{
-    padding: 17px 0;
-    background: white;
-}
 
 .empty_list figure{
     margin: 0;
@@ -128,18 +95,19 @@ div#root{
 
 
 .shoppingHistory{
-    grid-row: 1/4;
+    grid-row: 1/3;
     padding-top: 37px;
 }
 
 .historyView{
-    grid-row: 1/4;
+    grid-row: 1/3;
 }
 
 .historyView h4{
     font-weight: 700;
     font-size: 26px;
     color: #34333A;
+    margin: 0;
     margin-bottom: 5px;
 }
 
@@ -151,7 +119,7 @@ div#root{
     align-items: center;
     font-size: 13px;
     font-weight: 500;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
 }
 
 .food_itemCount{
@@ -177,58 +145,6 @@ div#root{
 .food_itemCount p{
     max-width: 100px;
     margin: 0;
-}
-
-.statistics{
-    grid-row:1/4;
-    display: grid;
-    grid-template: 300px 1fr/1fr 1fr;
-    grid-column-gap: 65px;
-    grid-row-gap: 50px;
-}
-
-.statistics .chart{
-    grid-column: 1/3;
-}
-
-.statsHeader{
-    margin: 38px 0 9px 0;
-    font-weight: 500;
-    font-size: 24px;
-}
-
-.background, .value{
-    width: 100%;
-    height: 6px;
-    background: #E0E0E0;
-    border-radius: 4px;
-}
-
-.topItems .value{
-    background: #F9A109;
-}
-
-.topCategories .value{
-    background: #56CCF2 ;
-}
-
-.statsRow >div:nth-child(1){
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 29px;
-}
-
-.statsRow >div> p:nth-child(2){
-    font-weight: 500;
-    font-size: 18px;
-    margin-top: 0;
-}
-
-.statsRow >div> p:nth-child(1){
-    font-weight: 500;
-    font-size: 14px;
-    margin-top: 0;
 }
 
 .chevron_right{
@@ -264,4 +180,23 @@ div#root{
 
 .event_note{
     color: #C1C1C4;
+}
+
+.back span{    
+    transform: rotateY(180deg);
+    color: #F9A109;
+}
+
+.back{
+    display: flex;
+    font-weight: 700;
+    font-size: 14px;
+    color: #F9A109;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
+}
+
+.historyView .back{
+    margin-top:20px
 }
