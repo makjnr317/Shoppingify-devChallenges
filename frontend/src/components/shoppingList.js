@@ -3,10 +3,10 @@ import "./shoppingList.css"
 import sauce from "../images/source.svg"
 import empty from "../images/undraw_shopping_app_flsj 1.svg"
 import {useSelector, useDispatch} from "react-redux"
-import {setEdit} from "../redux/actions"
-
+import {setEdit ,setInput} from "../redux/actions"
 
 function AddItem(){
+    const dispatch = useDispatch()
 	return(
 		<div className="add_item">
 			<div>
@@ -14,7 +14,7 @@ function AddItem(){
 			</div>
 			<div>
 				<p>Didn’t find what you need?</p>
-				<div className="add_item_button">
+				<div className="add_item_button" onClick={() => dispatch(setInput())}>
 					<span>Add Item</span>
 				</div>
 			</div>
@@ -77,7 +77,7 @@ function ShoppingListItem({inde, count= "3"}){
                         <div className="SlistItemCount">
                             {count} pcs
                         </div>
-                        <span class="material-icons modify-count">remove</span>
+                        <span className="material-icons modify-count">remove</span>
                     </div>
                 </div>
                 
@@ -135,7 +135,7 @@ function SaveList(){
     return(
         <div className="SaveList">
 			<div className="saveButtons">
-				<div className="cancel">cancel</div>
+				<div className="cancel" >cancel</div>
 				<div className="complete">Complete</div>
 			</div>
 		</div>

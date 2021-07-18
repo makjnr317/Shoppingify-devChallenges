@@ -5,7 +5,7 @@ function FoodItem({text}) {
     return (
         <div className="food_item">
             {text}
-			<span class="material-icons add-icon">add</span>
+			<span className="material-icons add-icon">add</span>
         </div>
     )
 }

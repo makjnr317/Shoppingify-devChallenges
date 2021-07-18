@@ -13,7 +13,7 @@ export default function ViewDetails({url="https://www.verywellhealth.com/thmb/bP
 	return (
 		<div className="viewFoodDetails">
 			<div className="back">
-				<span class="material-icons">trending_flat</span>
+				<span className="material-icons">trending_flat</span>
 				<p>back</p>
 			</div>
 			<div>

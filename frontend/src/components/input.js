@@ -1,7 +1,11 @@
 import React from 'react'
 import "./input.css"
+import { useDispatch} from "react-redux"
+import { setShoppingList } from '../redux/actions'
+
 
 export default function Input(){
+    const dispatch = useDispatch()
     return(
         <div className="input">
             <div>
@@ -34,7 +38,7 @@ export default function Input(){
             </div>
             
             <div className="buttons">
-                <div className="cancel">
+                <div className="cancel" onClick={() => dispatch(setShoppingList())}>
                     cancel
                 </div>
                 <div className="save">

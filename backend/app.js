@@ -2,8 +2,8 @@ const express = require("express")
 const dotenv = require("dotenv")
 const mongoose = require("mongoose")
 const app = express()
-const categories = "./routes/categoriesRoutes"
-const foodItem = "./routes/foodItemsRoutes"
+const foodItem = require("./routes/foodItemsRoutes")
+const history = require("./routes/shoppingList")
 
 app.use(express.json())
 dotenv.config()
@@ -12,16 +12,18 @@ const port = process.env.PORT
 const dbURI = process.env.dbURI
 
 
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI,{useNewUrlParser: true, useUnifiedTopology: true })
     .then(
         app.listen(port, ()=>{
-            console.log(`Listening at port ${port}`)}
-    ))
-    .catch(err => console.log(ertt))
+            console.log(`Listening at port ${port}`)
+        })
+        )
+    .catch(err => console.log(err))
 
+mongoose.set('useFindAndModify', true);
 
-app.use("/api/categories",categories)
-app.use("/api/foodItem",foodItem)
+app.use("/api/fooditems", foodItem)
+app.use("/api/history", history)
 
 app.use((req,res) =>{
     res.status(404).json({error: "not found"})

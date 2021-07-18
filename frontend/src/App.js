@@ -10,18 +10,16 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import {Route, Switch} from 'react-router-dom'
 import ShoppingHistory from "./components/ShopingHistory"
 import Statistics from "./components/statistics"
+import {useSelector} from "react-redux"
+import { Link } from 'react-router-dom'
+
 
 function SideBar(){
+	const sideVIew = useSelector(state => state.sidebar)
+	console.log(sideVIew)
 	return(
 		<div className="side_bar">
-			{/*
-				
-			
-			<ViewDetails/>
-			<Input/>
-			*/}
-
-			<ShoppingList/>
+			{(sideVIew === "ShoppingList")? <ShoppingList/> :(sideVIew === "Input")? <Input/>: <ViewDetails/>}
 		</div>
 	)
 }
@@ -54,10 +52,12 @@ function FoodItemCount({text}) {
 function HistoryView(){
 	return(
 		<div className="historyView">
-			<div className="back">
-				<span className="material-icons">trending_flat</span>
-				<p>back</p>
-			</div>
+			<Link to="/history">
+				<div className="back">
+					<span className="material-icons">trending_flat</span>
+					<p>back</p>
+				</div>
+			</Link>
 			<h4>Eero’s farewell party</h4>
 			<div className="date">
 			<span className="material-icons event_note">event_note</span>
@@ -73,12 +73,9 @@ function HistoryView(){
 
 
 function App() {
+	const modal = useSelector(state => state.modal)
 	return (
 		<>
-			{/*
-			<HistoryView/>
-			<ViewDetails/>
-			*/}
 			<Router>
 				<SideNav/>
 				<Switch>
@@ -97,7 +94,7 @@ function App() {
 			</Router>
 			
 			<SideBar/>
-			<Modal/>
+			{modal && <Modal/>}
 		</>
 	);
 }

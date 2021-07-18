@@ -21,7 +21,7 @@
 
 .shoppingListGrid{
     display: grid;
-    grid-row-gap: 30px;
+    grid-row-gap: 20px;
 }
 
 .shoppingList h3{
@@ -175,6 +175,7 @@
     display: grid;
     place-content: center;
     font-weight: 700;
+    color: white;
 }
 
 .cancel{

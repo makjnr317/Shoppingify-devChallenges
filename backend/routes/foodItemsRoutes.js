@@ -1,14 +1,19 @@
 const express = require("express")
-const route = express.Router()
+const router = express.Router()
 const foodItems = require("../models/food_items")
 
 
-route.get("/categories", (req,res)=>{
+router.get("/", (req,res) =>{
     foodItems.find()
+    .then(data => res.json(data))
+    .catch(err => console.log(err))
 })
 
-route.get("/:id", (req,res) =>{
-    const id = req.params.id
 
+router.post("/",(req,res)=>{
+    foodItems.updateOne({category: req.body.category},{$push:{food: req.body.food}},{upsert:true})
+    .then(res.json({message:true}))
+    .catch(err=> console.log(err))
 })
 
+module.exports = router

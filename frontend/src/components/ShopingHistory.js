@@ -17,10 +17,10 @@ function HistoryTab(){
 				<p>Grocery List</p>
 			</div>
 			<div>
-				<span class="material-icons event_note">event_note</span>
+				<span className="material-icons event_note">event_note</span>
 				<p>Mon 27.8.2020</p>
 				<StatusBar status="cancelled"/>
-				<span class="material-icons chevron_right">chevron_right</span>
+				<span className="material-icons chevron_right">chevron_right</span>
 			</div>
 		</div>
 	)
