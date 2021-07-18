@@ -4,15 +4,14 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    padding: 28px 40px 18px 40px;
+    background: #FAFAFE;
 }
 
 .input *{
     display: block;
 }
 
-.input{
-    padding: 28px 40px 18px 40px;
-}
 
 .input h6{
     font-weight: 500;
@@ -27,7 +26,7 @@
     margin-bottom: 6px;
 }
 
-.input input,.input textarea,.input select,option{
+.input input,.input textarea{
     padding: 17px 17px;
     width: 100%;
     height: 61;

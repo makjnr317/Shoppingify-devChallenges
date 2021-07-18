@@ -159,3 +159,34 @@
     padding: 17px 0;
     background: white;
 }
+
+.saveButtons{
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    margin: auto;
+}
+
+.saveButtons *{
+    width: 118px;
+    height: 59px;
+    background: #56CCF2;
+    border-radius: 12px;
+    display: grid;
+    place-content: center;
+    font-weight: 700;
+}
+
+.cancel{
+    color:black;
+    background: white;
+}
+
+.border-gray{
+    border-color: #C1C1C4;
+}
+
+.button-gray{
+    border-color: #C1C1C4;
+    background-color: #C1C1C4;
+}

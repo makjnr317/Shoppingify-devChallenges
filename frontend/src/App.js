@@ -16,9 +16,12 @@ function SideBar(){
 		<div className="side_bar">
 			{/*
 				
+			
 			<ViewDetails/>
-			<ShoppingList/>*/}
 			<Input/>
+			*/}
+
+			<ShoppingList/>
 		</div>
 	)
 }
@@ -52,12 +55,12 @@ function HistoryView(){
 	return(
 		<div className="historyView">
 			<div className="back">
-				<span class="material-icons">trending_flat</span>
+				<span className="material-icons">trending_flat</span>
 				<p>back</p>
 			</div>
 			<h4>Eero’s farewell party</h4>
 			<div className="date">
-			<span class="material-icons event_note">event_note</span>
+			<span className="material-icons event_note">event_note</span>
 				<p>Mon 27.8.2020</p>
 			</div>
 			<div className="monthTabs">

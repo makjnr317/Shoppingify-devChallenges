@@ -2,6 +2,8 @@ import React from 'react'
 import "./shoppingList.css"
 import sauce from "../images/source.svg"
 import empty from "../images/undraw_shopping_app_flsj 1.svg"
+import {useSelector, useDispatch} from "react-redux"
+import {setEdit} from "../redux/actions"
 
 
 function AddItem(){
@@ -20,12 +22,12 @@ function AddItem(){
 	)
 }
 
-function SaveList(){
+function SaveListEdit({empty}){
 	return(
 		<div className="SaveList">
-			<div className="ListNameSave">
+			<div className={`${(empty)? "border-gray ": ""}ListNameSave`}>
 				<input type="text" placeholder="Enter a name"/>
-				<div className="SaveListButton">
+				<div className={`${(empty)? "button-gray ": ""}SaveListButton`}>
 					Save
 				</div>
 			</div>
@@ -34,7 +36,8 @@ function SaveList(){
 }
 
 
-function ShoppingListItem({inde, count= "3", edit=!true}){
+function ShoppingListItem({inde, count= "3"}){
+    const edit = useSelector(state => state.edit)
     var dynamicElement = `.modifyCount-${inde}`
     var listItemName = `.listItemName-${inde}`
     var checkbox = `.checbox-${inde}`
@@ -58,22 +61,23 @@ function ShoppingListItem({inde, count= "3", edit=!true}){
     }
 
     return(
+
         <div className="shoppingListItem">
             <div>
-                {!edit && <input type="checkbox" class={`checbox-${inde}`} onChange={handleToggle}/>}
+                {!edit && <input type="checkbox" className={`checbox-${inde}`} onChange={handleToggle}/>}
                 <p className={`listItemName-${inde} listItemName`}>Avocado</p>
             </div>
             <div>
-                <div className="modifyCountPlaceholder" onMouseOver={edit && handleHover} onMouseLeave={handleLeave}>
+                <div className="modifyCountPlaceholder" onMouseOver={(edit)? handleHover: undefined} onMouseLeave={handleLeave}>
                     <div className={`modifyCount-${inde} modifyCount`}>
                         <div className="trashBox">
-                        <span class="material-icons">delete_outline</span>
+                        <span className="material-icons">delete_outline</span>
                         </div>
-                        <span class="material-icons modify-count">add</span>
+                        <span className="material-icons modify-count">add</span>
                         <div className="SlistItemCount">
                             {count} pcs
                         </div>
-                        <span class="material-icons modify-count">add</span>
+                        <span class="material-icons modify-count">remove</span>
                     </div>
                 </div>
                 
@@ -111,11 +115,12 @@ function EmptyList(){
 }
 
 function NonEmptyList(){
+    const dispatch = useDispatch()
     return(
         <div className="shoppingList">
             <div className="shoppingListHeader">
                 <h3>Shopping List</h3>
-                <span class="material-icons edit-icon">edit</span>
+                <span className="material-icons edit-icon" onClick={() => dispatch(setEdit())}>edit</span>
             </div>
             <div className="shoppingListGrid">
                 <ShoppingListCategory index ="0"/>
@@ -126,13 +131,26 @@ function NonEmptyList(){
     )
 }
 
+function SaveList(){
+    return(
+        <div className="SaveList">
+			<div className="saveButtons">
+				<div className="cancel">cancel</div>
+				<div className="complete">Complete</div>
+			</div>
+		</div>
+    )
+}
+
 export default function ShoppingList(){
+    const edit = useSelector(state => state.edit)
+
     var empty = false
     return(
         <>
             <AddItem/>
             {(empty)? <EmptyList/>: <NonEmptyList/>}
-            <SaveList empty={empty}/> 
+            {(edit)? <SaveListEdit empty={empty}/> : <SaveList/>}
         </>
     )
 }

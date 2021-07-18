@@ -200,3 +200,7 @@ div#root{
 .historyView .back{
     margin-top:20px
 }
+
+.material-icons {
+    user-select: none;
+}

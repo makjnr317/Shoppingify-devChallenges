@@ -61,7 +61,7 @@ export default function SideNav() {
 
             <div className="cart">
                 <div className="shoppingCart">
-                    <span class="material-icons">shopping_cart</span>
+                    <span className="material-icons">shopping_cart</span>
                 </div>
             </div>
         </div>
