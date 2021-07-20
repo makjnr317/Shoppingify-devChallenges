@@ -3,7 +3,7 @@ import "./shoppingList.css"
 import sauce from "../images/source.svg"
 import empty from "../images/undraw_shopping_app_flsj 1.svg"
 import {useSelector, useDispatch} from "react-redux"
-import {setEdit ,setInput} from "../redux/actions"
+import {setEdit ,setInput, toggleModal} from "../redux/actions"
 
 function AddItem(){
     const dispatch = useDispatch()
@@ -132,10 +132,11 @@ function NonEmptyList(){
 }
 
 function SaveList(){
+    const dispatch = useDispatch()
     return(
         <div className="SaveList">
 			<div className="saveButtons">
-				<div className="cancel" >cancel</div>
+				<div className="cancel"  onClick={()=> dispatch(toggleModal())}>cancel</div>
 				<div className="complete">Complete</div>
 			</div>
 		</div>

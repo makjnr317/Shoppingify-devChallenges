@@ -3,14 +3,11 @@ const {Schema} = require("mongoose")
 
 const ShoppingHistoryModel = new Schema({
     name: String,
-    date : {
-        type: Date,
-        default: Date.now
-    },
+    date : {type: Date, default: Date.now},
     status: String,
     items:[{
-        name:String,
-        number: Number
+        category:String,
+        food : [{foodItemId :String, name: String, number: Number}]
     }]
 })
 

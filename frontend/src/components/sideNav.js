@@ -2,7 +2,8 @@ import React from 'react'
 import logo from "../images/logo.svg" 
 import "./sideNav.css"
 import { useLocation, Link } from 'react-router-dom';
-
+import { setShoppingList } from '../redux/actions'
+import { useDispatch } from "react-redux"
 
 function MenuItem({icon, title, curIcon}){
     const handleHover = () =>{
@@ -36,6 +37,7 @@ function MenuItem({icon, title, curIcon}){
 }
 
 export default function SideNav() {
+    const dispatch = useDispatch()
     const location = useLocation().pathname
     let curIcon = (location === "/")? "list" : (location  === "/history")? "replay" : "poll"
     
@@ -60,7 +62,7 @@ export default function SideNav() {
             </div>
 
             <div className="cart">
-                <div className="shoppingCart">
+                <div className="shoppingCart" onClick={()=> dispatch(setShoppingList())}>
                     <span className="material-icons">shopping_cart</span>
                 </div>
             </div>
