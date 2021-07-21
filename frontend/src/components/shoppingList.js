@@ -3,7 +3,7 @@ import "./shoppingList.css"
 import sauce from "../images/source.svg"
 import empty from "../images/undraw_shopping_app_flsj 1.svg"
 import {useSelector, useDispatch} from "react-redux"
-import {setEdit ,setInput, toggleModal} from "../redux/actions"
+import {setEdit ,setInput, toggleModal, alterName, addItem} from "../redux/actions"
 
 function AddItem(){
     const dispatch = useDispatch()
@@ -14,7 +14,7 @@ function AddItem(){
 			</div>
 			<div>
 				<p>Didn’t find what you need?</p>
-				<div className="add_item_button" onClick={() => dispatch(setInput())}>
+				<div className="add_item_button" onClick={() => dispatch(addItem())}>
 					<span>Add Item</span>
 				</div>
 			</div>
