@@ -68,7 +68,13 @@ svg{
 }
 
 .chartBox>div{
-    height: 370px !important;
+    height: 90% !important;
     position: relative;
     top: -20px;
+}
+
+.noChartData{
+    height: 90%;
+    display: grid;
+    place-content: center;
 }

@@ -61,28 +61,24 @@ function Chart(){
               "y": 51
             },
             {
-              "x": "March",
-              "y": 98
+              "x": "Februar",
+              "y": 51
             },
             {
-              "x": "April",
-              "y": 50
-            },
-            {
-              "x": "May",
-              "y": 55
-            },
-            {
-              "x": "June",
-              "y": 80
-            },
-            {
-              "x": "July",
-              "y": 21
+              "x": "Februry",
+              "y": 51
             }
           ]
         }
       ]
+
+	if (data[0].data.length < 3){
+		return(
+			<div className="noChartData">
+				<p>Not enough data to make graph</p>
+			</div>
+		)
+	}
         
     return(
         <ResponsiveLine

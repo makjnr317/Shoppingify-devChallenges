@@ -20,6 +20,29 @@ export const addItem = () => {
             payload: {
                 "category" : "Fruits and Veges",
                 "name": "Avocado",
-                "foodItemID": "1234567"
+                "foodItemID": "12345"
             }
 }}
+
+
+
+export const itemNumberChange = () => {
+    return {
+            type: "ITEM_NUMBER_CHANGE",
+            payload: {
+                "category" : "Fruits and Veges",
+                "foodItemID": "12345",
+                "change": -1
+            }
+}}
+
+export const itemRemove = () => {
+    return {
+            type: "ITEM_REMOVE",
+            payload: {
+                "category" : "Fruits and Veges",
+                "foodItemID": "12345",
+            }
+}}
+
+export const setData = () => {return {type: "SET_DATA"}}

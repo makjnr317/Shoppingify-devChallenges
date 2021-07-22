@@ -15,6 +15,7 @@ router.get("/",(req,res)=>{
 /* add new shopping list to history */
 router.post("/",(req,res)=>{
     history.create(req.body)
+    .then(res.json({message: "Ok"}))
     .catch(err => console.log(err))
 })
 

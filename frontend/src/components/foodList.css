@@ -15,7 +15,7 @@
 }
 
 .food_list{
-    grid-row: 2/4;
+    grid-row: 2/3;
     display: grid;
     grid-row-gap: 48px;
     height: min-content;
@@ -36,4 +36,11 @@
 
 .category{
     height: max-content;
+}
+
+.noFoodData{
+    grid-row: 2/3;
+    height: 90%;
+    display: grid;
+    place-content: center;
 }

@@ -5,6 +5,9 @@ const app = express()
 const foodItem = require("./routes/foodItemsRoutes")
 const history = require("./routes/shoppingList")
 const statistics = require("./routes/statistics")
+const cors = require("cors")
+
+app.use(cors())
 app.use(express.json())
 dotenv.config()
 
