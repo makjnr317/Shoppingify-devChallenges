@@ -11,7 +11,6 @@
     margin: 0 0 5px 0;
 }
 
-
 .shoppingList{
     padding: 0 27px 0 45px;
     overflow-y: auto;
@@ -197,11 +196,13 @@
     align-items: center;
     justify-content: space-between;
     margin: auto;
+    height: 100%;
+    
 }
 
 
 .empty_list figure{
     margin: 0;
     position: relative;
-    bottom: -93px;
+    bottom: -12px;
 }

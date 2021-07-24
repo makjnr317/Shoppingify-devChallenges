@@ -2,8 +2,8 @@ import React from 'react'
 import logo from "../images/logo.svg" 
 import "./sideNav.css"
 import { useLocation, Link } from 'react-router-dom';
-import { setShoppingList } from '../redux/actions'
-import { useDispatch } from "react-redux"
+import { setShoppingList , clearList,setEdit} from '../redux/actions'
+import { useDispatch , useSelector} from "react-redux"
 
 function MenuItem({icon, title, curIcon}){
     const handleHover = () =>{
@@ -39,6 +39,15 @@ function MenuItem({icon, title, curIcon}){
 export default function SideNav() {
     const dispatch = useDispatch()
     const location = useLocation().pathname
+    const list = useSelector(state => state.shoppingList)
+
+    const numberOfItems = list.items.map(x =>x.food.length).reduce((a,b)=> a+ b, 0)
+
+    if (numberOfItems === 0 && list.items.length !== 0){
+        dispatch(clearList())
+        dispatch(setEdit())
+    }
+
     let curIcon = (location === "/")? "list" : (location  === "/history")? "replay" : "poll"
     
     return (
@@ -62,6 +71,7 @@ export default function SideNav() {
             </div>
 
             <div className="cart">
+                {(numberOfItems > 0) && <div className="cart-count"><p>{numberOfItems}</p></div>}
                 <div className="shoppingCart" onClick={()=> dispatch(setShoppingList())}>
                     <span className="material-icons">shopping_cart</span>
                 </div>

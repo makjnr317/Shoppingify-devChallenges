@@ -46,6 +46,7 @@ function FoodItem({text, id, category}) {
 }
 
 function FoodCategory({category,food}){
+	console.log(food)
 	return(
 		<div className="category">
 			<h3>{category}</h3>

@@ -90,3 +90,22 @@ a{
     left: -8px;
     top: 4px;
 }
+
+.cart-count{
+    width: 21px;
+    height: 20px;
+    background: #EB5757;
+    border-radius: 4px;
+    color: white;
+    position: relative;
+    left: 25px;
+    top: 15px;
+    display: grid;
+    place-content: center;
+}
+
+.cart-count *{
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+}

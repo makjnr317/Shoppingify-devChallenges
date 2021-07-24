@@ -165,7 +165,7 @@ export default function ShoppingList(){
         <>
             <AddItem/>
             {(empty)? <EmptyList/>: <NonEmptyList name={list.name} items={list.items}/>}
-            {(edit)? <SaveListEdit empty={empty}/> : <SaveList/>}
+            {(empty)? <SaveListEdit empty={empty}/>: (edit)? <SaveListEdit empty={empty}/>: <SaveList/>}
         </>
     )
 }
