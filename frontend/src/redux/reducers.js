@@ -112,24 +112,22 @@ const shoppingList = (state=initialShoppingList,action) =>{
     }
 }
 
-var data
-
-
-
-
-const foodList = (state=[],action) =>{
-    var data
+const viewData = (state={},action) =>{
     switch(action.type){
-        case "SET_DATA":
-            fetch("http://localhost:7000/api/fooditems")
-                .then(res => res.json())
-                .then(res => {return res})
-                .catch(err => console.log(err))
-            
+        case "POPULATE":
+            return action.payload
         default:
             return state
     }
 }
 
+const dataWatcher = (state=false, action) => {
+    switch(action.type){
+        case "WATCH_DATA":
+            return !state
+        default:
+            return state
+    }
+}
 
-export default combineReducers({edit, sidebar,modal,shoppingList,foodList})
+export default combineReducers({edit, sidebar,modal,shoppingList, viewData, dataWatcher})

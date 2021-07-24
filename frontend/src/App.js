@@ -74,6 +74,7 @@ function HistoryView(){
 
 function App() {
 	const modal = useSelector(state => state.modal)
+
 	return (
 		<>
 			<Router>

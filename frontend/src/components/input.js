@@ -1,7 +1,8 @@
 import "./input.css"
 import React, { useState } from 'react'
 import { useDispatch} from "react-redux"
-import { setShoppingList } from '../redux/actions'
+import { setShoppingList , dataUpdate} from '../redux/actions'
+import { useHistory } from 'react-router-dom'
 
 
 export default function Input(){
@@ -10,6 +11,7 @@ export default function Input(){
     const [note, setnote] = useState("")
     const [url, seturl] = useState("")
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const handleFetch = () =>{
         let nameField = document.querySelector("#name")
@@ -42,7 +44,10 @@ export default function Input(){
             body: JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(dispatch(setShoppingList()))
+        .then(() =>{
+            dispatch(setShoppingList())
+            dispatch(dataUpdate())
+        })
         .catch(err => console.log(err))
     }
 

@@ -8,6 +8,8 @@ export const setShoppingList = () => {return {type: "SHOPPING_LIST"}}
 
 export const toggleModal = () => {return {type: "TOGGLE_MODAL"}}
 
+export const dataUpdate = () => {return {type: "WATCH_DATA"}}
+
 export const alterName = () => {
     return {
             type: "ALTER_NAME",
@@ -45,4 +47,12 @@ export const itemRemove = () => {
             }
 }}
 
-export const setData = () => {return {type: "SET_DATA"}}
+
+export const populate = (id,category) => {
+    return {
+            type: "POPULATE",
+            payload: {id, category}
+}}
+
+
+

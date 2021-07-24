@@ -18,7 +18,9 @@
     grid-row: 2/3;
     display: grid;
     grid-row-gap: 48px;
-    height: min-content;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .category h3{
