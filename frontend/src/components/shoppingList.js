@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./shoppingList.css"
 import sauce from "../images/source.svg"
 import empty from "../images/undraw_shopping_app_flsj 1.svg"
@@ -23,11 +23,14 @@ function AddItem(){
 }
 
 function SaveListEdit({empty}){
+    const [name, setname] = useState("")
+    const dispatch = useDispatch()
+
 	return(
 		<div className="SaveList">
 			<div className={`${(empty)? "border-gray ": ""}ListNameSave`}>
-				<input type="text" placeholder="Enter a name"/>
-				<div className={`${(empty)? "button-gray ": ""}SaveListButton`}>
+				<input type="text" placeholder="Enter a name" value={name} onChange={(event) => setname(event.target.value)}/>
+				<div className={`${(empty)? "button-gray ": ""}SaveListButton`} onClick={() => {dispatch(alterName(name)); setname("")}}>
 					Save
 				</div>
 			</div>
@@ -36,17 +39,19 @@ function SaveListEdit({empty}){
 }
 
 
-function ShoppingListItem({inde, count= "3"}){
+function ShoppingListItem({index, name ,count, id, category}){
+    const dispatch = useDispatch()
     const edit = useSelector(state => state.edit)
-    var dynamicElement = `.modifyCount-${inde}`
-    var listItemName = `.listItemName-${inde}`
-    var checkbox = `.checbox-${inde}`
+    var dynamicElement = `.modifyCount-${index}`
+    var listItemName = `.listItemName-${index}`
+    var checkbox = `.checbox-${index}`
+    const _id = id
 
-    const handleHover = (inde) =>{ 
+    const handleHover = () =>{ 
         document.querySelector(dynamicElement).style.display = "flex";
     }
 
-    const handleLeave = (inde) =>{ 
+    const handleLeave = () =>{ 
         document.querySelector(dynamicElement).style.display = "none";
     }
 
@@ -64,20 +69,30 @@ function ShoppingListItem({inde, count= "3"}){
 
         <div className="shoppingListItem">
             <div>
-                {!edit && <input type="checkbox" className={`checbox-${inde}`} onChange={handleToggle}/>}
-                <p className={`listItemName-${inde} listItemName`}>Avocado</p>
+                {!edit && <input type="checkbox" className={`checbox-${index}`} onChange={handleToggle}/>}
+                <p className={`listItemName-${index} listItemName`}>{name}</p>
             </div>
             <div>
                 <div className="modifyCountPlaceholder" onMouseOver={(edit)? handleHover: undefined} onMouseLeave={handleLeave}>
-                    <div className={`modifyCount-${inde} modifyCount`}>
+                    <div className={`modifyCount-${index} modifyCount`}>
                         <div className="trashBox">
-                        <span className="material-icons">delete_outline</span>
+                        <span className="material-icons" onClick={()=> dispatch(itemRemove(category, id))}>delete_outline</span>
                         </div>
-                        <span className="material-icons modify-count">add</span>
+                        <span className="material-icons modify-count" onClick={() => {
+                            dispatch(itemNumberChange(category, id, 1))
+                            }}>add</span>
                         <div className="SlistItemCount">
                             {count} pcs
                         </div>
-                        <span className="material-icons modify-count">remove</span>
+                        <span className="material-icons modify-count"  
+                            onClick={() => {
+                                if (count > 1){
+                                    dispatch(itemNumberChange(category, id, -1))
+                                }else{
+                                    dispatch(itemRemove(category, id))
+                                }
+                            }}>
+                            remove</span>
                     </div>
                 </div>
                 
@@ -89,13 +104,12 @@ function ShoppingListItem({inde, count= "3"}){
     )
 }
 
-function ShoppingListCategory({index}){
+function ShoppingListCategory({category, food}){
     return(
         <div className="shoppinglistcategory">
-            <h4 className="categoryheading">Fruits & Vegetables</h4>
+            <h4 className="categoryheading">{category}</h4>
             <div className="sListItemGrid">
-                <ShoppingListItem inde={`${index}-0`}/>
-                <ShoppingListItem inde={`${index}-1`}/>
+                {food.map((foodItem, i) => (<ShoppingListItem key={i} index={`${category}-${i}`} name={foodItem.name} count={foodItem.number} id={foodItem.foodItemId} category={category}/>))}
             </div>
         </div>
     )
@@ -114,18 +128,17 @@ function EmptyList(){
 	)
 }
 
-function NonEmptyList(){
+function NonEmptyList({name, items}){
     const dispatch = useDispatch()
+
     return(
         <div className="shoppingList">
             <div className="shoppingListHeader">
-                <h3>Shopping List</h3>
+                <h3>{name}</h3>
                 <span className="material-icons edit-icon" onClick={() => dispatch(setEdit())}>edit</span>
             </div>
             <div className="shoppingListGrid">
-                <ShoppingListCategory index ="0"/>
-                <ShoppingListCategory index ="1"/>
-                <ShoppingListCategory index ="2"/>
+                {items.map((category, i) => ( (category.food.length > 0) && <ShoppingListCategory key={i} food={category.food} category={category.category}/>))}
             </div>
         </div>
     )
@@ -145,12 +158,13 @@ function SaveList(){
 
 export default function ShoppingList(){
     const edit = useSelector(state => state.edit)
+    const list = useSelector(state => state.shoppingList)
 
-    var empty = false
+    const empty = list.items.length === 0
     return(
         <>
             <AddItem/>
-            {(empty)? <EmptyList/>: <NonEmptyList/>}
+            {(empty)? <EmptyList/>: <NonEmptyList name={list.name} items={list.items}/>}
             {(edit)? <SaveListEdit empty={empty}/> : <SaveList/>}
         </>
     )

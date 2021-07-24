@@ -22,6 +22,16 @@ router.get("/:id",(req,res)=>{
     .catch(err=> console.log(err))
 })
 
+router.delete("/:id",(req,res)=>{
+    const id = req.params.id
+
+    foodItems.updateOne(
+            {"food._id": id},
+            {$pull : {food : {_id: id}}})
+    .then(data => res.json(data))
+    .catch(err=> console.log(err))
+})
+
 /* add food item to category. create category if non-existant */
 router.post("/",(req,res)=>{
     foodItems.updateOne({category: req.body.category},{$push:{food: req.body.food}},{upsert:true})

@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import "./foodList.css"
 import axios from 'axios'
-import { setViewDetails, populate } from '../redux/actions'
+import { setViewDetails, populate , addItem} from '../redux/actions'
 import { useDispatch , useSelector} from 'react-redux'
 
 function FoodItem({text, id, category}) {
 	const dispatch = useDispatch()
 	
-	const handleClick = (id) =>{
-		dispatch(populate(id, category))
-		dispatch(setViewDetails())
+	const handleClick = (event, id) =>{
+		if (document.querySelector(`#${text}`) === event.target){
+			dispatch(populate(id, category))
+			dispatch(setViewDetails())
+		}
 	}
 
     return (
-        <div className="food_item" onClick={() => handleClick(id,category)}>
+        <div className="food_item" id={text} onClick={(event) => handleClick(event,id)}>
             {text}
-			<span className="material-icons add-icon">add</span>
+			<span className="material-icons add-icon" onClick={() => dispatch(addItem(category, text, id)) }>add</span>
         </div>
     )
 }
@@ -43,7 +45,7 @@ export default function FoodList(){
 
 	return(
 		<div className="food_list">
-			{data.map((category, i) => (<FoodCategory key={i} category={category.category} food={category.food}/> ))}
+			{data.map((category, i) => ((category.food.length > 0) && <FoodCategory key={i} category={category.category} food={category.food}/> ))}
 		</div>
 	)
 }

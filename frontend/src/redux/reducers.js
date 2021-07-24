@@ -69,6 +69,7 @@ const shoppingList = (state=initialShoppingList,action) =>{
             foods = state.items[index].food.map(a => a.foodItemId)
             foodIndex = foods.indexOf(foodItemId)
             foodItem = state.items[index].food[foodIndex]
+
             return {
                 ...state,
                 "items" : [
@@ -77,7 +78,7 @@ const shoppingList = (state=initialShoppingList,action) =>{
                             ...state.items[index], 
                             "food": [
                                     ...state.items[index].food.slice(0, foodIndex), 
-                                    {name: foodItem.name,foodItemId: foodItem.foodItemId, number: foodItem.number + change}, 
+                                    {name: foodItem.name, foodItemId: foodItem.foodItemId, number: foodItem.number + change}, 
                                     ...state.items[index].food.slice(foodIndex + 1)]
                         }, 
                         ...state.items.slice(index + 1)
@@ -107,6 +108,11 @@ const shoppingList = (state=initialShoppingList,action) =>{
                         }, 
                         ...state.items.slice(index + 1)
                 ]}
+        case "CLEAR_LIST":
+            return {
+                "name": state.name,
+                "items": []
+            }
         default:
             return state
     }

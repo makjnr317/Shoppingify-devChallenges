@@ -1,5 +1,6 @@
 .add-icon{
-    color:#C1C1C4
+    color:#C1C1C4;
+    margin: 0 2px;
 }
 
 .food_item{
@@ -16,11 +17,13 @@
 
 .food_list{
     grid-row: 2/3;
-    display: grid;
+    display: flex;
     grid-row-gap: 48px;
     padding-bottom: 20px;
     overflow-y: auto;
     overflow-x: hidden;
+    height: 100%;
+    flex-direction: column;
 }
 
 .category h3{

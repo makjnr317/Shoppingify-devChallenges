@@ -1,7 +1,7 @@
 import React from 'react'
 import "./modal.css"
 import {useDispatch} from "react-redux"
-import {toggleModal} from "../redux/actions"
+import {toggleModal, clearList} from "../redux/actions"
 
 export default function Modal(){
 	const dispatch = useDispatch()
@@ -23,7 +23,10 @@ export default function Modal(){
 					<div className="modalCancel" onClick={()=> dispatch(toggleModal())}>
 						Cancel
 					</div>
-					<div className="modalApprove">
+					<div className="modalApprove" onClick={() => {
+						dispatch(clearList())
+						dispatch(toggleModal())
+					}}>
 						Yes
 					</div>
 				</div>

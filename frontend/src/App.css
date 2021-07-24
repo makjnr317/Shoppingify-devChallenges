@@ -75,25 +75,6 @@ div#root{
     top: -36px;
 }
 
-.empty_list{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: -webkit-fill-available;
-}
-
-
-.empty_list figure{
-    margin: 0;
-}
-
-.empty_list img{
-    position: relative;
-    bottom: -12px;
-}
-
-
 .shoppingHistory{
     grid-row: 1/3;
     padding-top: 37px;
