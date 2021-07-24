@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "./viewDetails.css"
 import { useSelector, useDispatch  } from 'react-redux'
 import axios from 'axios'
-import { setShoppingList , dataUpdate, addItem} from '../redux/actions'
+import { setShoppingList , dataUpdate, addItem, itemNumberChange} from '../redux/actions'
 
 function Note({note}){
 	return(
@@ -18,6 +18,8 @@ export default function ViewDetails(){
 	var viewData = useSelector(state => state.viewData)
 	const [data, setdata] = useState({})
 	const [category, setcategory] = useState("")
+	const list = useSelector(state => state.shoppingList)
+	var categories, iteminList
 
 	useEffect(() => {
 		if (!(viewData === {})){
@@ -36,6 +38,29 @@ export default function ViewDetails(){
 			dispatch(dataUpdate())
 		})
 		.catch(err => console.log(err))
+	}
+
+	const handleAdd = (text, id) =>{
+		iteminList = false
+		categories = list.items.filter(x => x.category === category)
+
+		if (categories.length === 0){
+			dispatch(addItem(category, text, id))
+			dispatch(setShoppingList())
+			return
+		}
+
+		categories[0].food.forEach(el =>{
+			if (el.foodItemId === id){
+				dispatch(itemNumberChange(category, id, 1))
+				dispatch(setShoppingList())
+				iteminList = true
+			}
+		})
+		if (!iteminList){
+			dispatch(addItem(category, text, id))
+			dispatch(setShoppingList())
+		}
 	}
 
 	return (
@@ -58,11 +83,7 @@ export default function ViewDetails(){
 			</div>
 			<div className="buttons">
 				<div className="delete" onClick={() => del(viewData.id)}>Delete</div>
-				<div className="addtolist" 
-					onClick={() => {
-						dispatch(addItem(category, data.name, viewData.id)) 
-						dispatch(setShoppingList())
-					}}>
+				<div className="addtolist" onClick={() => handleAdd(data.name,viewData.id)}>
 					Add To List
 				</div>
 			</div>

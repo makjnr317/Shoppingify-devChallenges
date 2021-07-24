@@ -16,7 +16,6 @@ import { Link } from 'react-router-dom'
 
 function SideBar(){
 	const sideVIew = useSelector(state => state.sidebar)
-	console.log(sideVIew)
 	return(
 		<div className="side_bar">
 			{(sideVIew === "ShoppingList")? <ShoppingList/> :(sideVIew === "Input")? <Input/>: <ViewDetails/>}

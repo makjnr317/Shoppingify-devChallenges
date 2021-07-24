@@ -1,12 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import "./foodList.css"
 import axios from 'axios'
-import { setViewDetails, populate , addItem} from '../redux/actions'
+import { setViewDetails, populate , addItem, itemNumberChange} from '../redux/actions'
 import { useDispatch , useSelector} from 'react-redux'
 
 function FoodItem({text, id, category}) {
 	const dispatch = useDispatch()
-	
+	const list = useSelector(state => state.shoppingList)
+
+	var categories, iteminList
+	const handleAdd = () =>{
+		iteminList = false
+		categories = list.items.filter(x => x.category === category)
+
+		if (categories.length === 0){
+			dispatch(addItem(category, text, id))
+			return
+		}
+
+		categories[0].food.forEach(el =>{
+			if (el.foodItemId === id){
+				dispatch(itemNumberChange(category, id, 1))
+				iteminList = true
+			}
+		})
+		if (!iteminList){
+
+		dispatch(addItem(category, text, id))
+		}
+	}
+
 	const handleClick = (event, id) =>{
 		if (document.querySelector(`#${text}`) === event.target){
 			dispatch(populate(id, category))
@@ -17,7 +40,7 @@ function FoodItem({text, id, category}) {
     return (
         <div className="food_item" id={text} onClick={(event) => handleClick(event,id)}>
             {text}
-			<span className="material-icons add-icon" onClick={() => dispatch(addItem(category, text, id)) }>add</span>
+			<span className="material-icons add-icon" onClick={handleAdd}>add</span>
         </div>
     )
 }

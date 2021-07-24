@@ -48,6 +48,8 @@ const shoppingList = (state=initialShoppingList,action) =>{
             name = action.payload["name"]
             categories = state.items.map(a => a.category)
             index = categories.indexOf(category)
+            
+
             if (index > -1){
                 return{
                     ...state,
@@ -91,11 +93,7 @@ const shoppingList = (state=initialShoppingList,action) =>{
             foods = state.items[index].food.map(a => a.foodItemId)
             foodIndex = foods.indexOf(foodItemId)
             foodItem = state.items[index].food[foodIndex]
-            console.log(state.items[index].food)
-            console.log([
-                ...state.items[index].food.slice(0, foodIndex),  
-                ...state.items[index].food.slice(foodIndex + 1)
-            ])
+
             return {
                 ...state,
                 "items" : [
