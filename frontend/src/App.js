@@ -84,8 +84,10 @@ function App() {
 						<FoodList/>
 					</Route>
 					<Route path="/history">
-						{/*<ShoppingHistory/>*/}
+						{/*
 						<HistoryView/>
+						*/}
+						<ShoppingHistory/>
 					</Route>
 					<Route path="/statistics">
 						<Statistics/>

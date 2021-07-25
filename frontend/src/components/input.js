@@ -1,8 +1,7 @@
 import "./input.css"
 import React, { useState } from 'react'
-import { useDispatch} from "react-redux"
+import { useDispatch, useSelector} from "react-redux"
 import { setShoppingList , dataUpdate} from '../redux/actions'
-import { useHistory } from 'react-router-dom'
 
 
 export default function Input(){
@@ -11,7 +10,7 @@ export default function Input(){
     const [note, setnote] = useState("")
     const [url, seturl] = useState("")
     const dispatch = useDispatch()
-    const history = useHistory()
+    const categories = useSelector(state => state.categories)
 
     const handleFetch = () =>{
         let nameField = document.querySelector("#name")
@@ -33,7 +32,11 @@ export default function Input(){
         }
 
         if (invalidName || invalidCategory){return}
-    
+
+        setnote(note.trim())
+        setname(name.trim())
+        setcategory(category.trim())
+        
         let data = {category , "food" :{name, note: (note)? note: undefined, image: (url)? url: undefined}}
 
         fetch('http://localhost:7000/api/fooditems', {
@@ -81,13 +84,9 @@ export default function Input(){
                     <div>
                         <label for="category">Category</label>
                         <input type="text" name="category" id="category" placeholder="Enter a category" value={category} onFocus={viewOption} onBlur={hideOption} onChange={(event)=> setcategory(event.target.value)}/>
-                        <div className="categoryOptions">
-                            <div className="option" tabIndex="0">Fruits</div>
-                            <div className="option" tabIndex="0">Cereals</div>
-                            <div className="option" tabIndex="0">Cereals</div>
-                            <div className="option" tabIndex="0">Vegetables</div>
-                            <div className="option" tabIndex="0">Vegetables</div>
-                        </div>
+                        {(categories.length > 0) && <div className="categoryOptions">
+                            {categories.map((category, i) => (<div className="option" tabIndex="0">{category}</div>))}
+                        </div>}
                     </div>
                 </form>
             </div>

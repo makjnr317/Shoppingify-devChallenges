@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import "./foodList.css"
 import axios from 'axios'
-import { setViewDetails, populate , addItem, itemNumberChange} from '../redux/actions'
+import { setViewDetails, populate , addItem, itemNumberChange, setCategories} from '../redux/actions'
 import { useDispatch , useSelector} from 'react-redux'
 
 function FoodItem({text, id, category}) {
@@ -31,14 +31,14 @@ function FoodItem({text, id, category}) {
 	}
 
 	const handleClick = (event, id) =>{
-		if (document.querySelector(`#${text}`) === event.target){
+		if (document.querySelector(`#${text.replace(/ /g, "")}`) === event.target){
 			dispatch(populate(id, category))
 			dispatch(setViewDetails())
 		}
 	}
 
     return (
-        <div className="food_item" id={text} onClick={(event) => handleClick(event,id)}>
+        <div className="food_item" id={text.replace(/ /g, "")} onClick={(event) => handleClick(event,id)}>
             {text}
 			<span className="material-icons add-icon" onClick={handleAdd}>add</span>
         </div>
@@ -59,30 +59,31 @@ function FoodCategory({category,food}){
 			</div>
 		)
 	}
-	else{
-		return (
-			<></>
-		)
-	}
-
 	
+	return (
+		<></>
+	)
 }
  
 
 export default function FoodList(){
+	const dispatch = useDispatch()
 	const dataWatcher = useSelector(state => state.dataWatcher)
 	const [data, setData] = useState([])
 	const search = useSelector(state => state.search)
+	const categories = data.map(x => x.category)
+	dispatch(setCategories(categories))
 
 	useEffect(() => {
 		axios.get("http://localhost:7000/api/fooditems")
 		.then(res => {setData(res.data)})
 	},[dataWatcher])
 
+
 	var s = ((data.map(x=> x.food.map(x => x.name)).reduce((a, b)=> a + b, []))) + ''
 	s = s.split(",")
 	const searchValid = ((s.map(x=> x.toLowerCase().includes(search.trim().toLowerCase()))).reduce((a,b) => a || b, false))
-
+	
 	if (searchValid){
 		return(
 			<div className="food_list">

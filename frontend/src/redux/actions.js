@@ -26,8 +26,6 @@ export const addItem = (category, name, id) => {
             }
 }}
 
-
-
 export const itemNumberChange = (category,id,change) => {
     return {
             type: "ITEM_NUMBER_CHANGE",
@@ -47,14 +45,11 @@ export const itemRemove = (category, id) => {
             }
 }}
 
-
 export const populate = (id,category) => {
     return {
             type: "POPULATE",
             payload: {id, category}
 }}
-
-
 
 export const setSearch = (search) => {
     return {
@@ -62,4 +57,10 @@ export const setSearch = (search) => {
             payload: search
 }}
 
-export const clearList = (id,category) => {return {type: "CLEAR_LIST"}}
+export const clearList = () => {return {type: "CLEAR_LIST"}}
+
+export const setCategories = (categories) => {
+    return {
+            type: "SET_CATEGORIES",
+            payload: categories
+}}

@@ -36,6 +36,13 @@ var initialShoppingList = {"name": "Shopping List", "items": []}
 
 const shoppingList = (state=initialShoppingList,action) =>{
     var category, name, foodItemId,categories, index, change, foods, foodIndex, foodItem
+    if (action.hasOwnProperty('payload')){
+        category = action.payload["category"]
+        foodItemId = action.payload["foodItemID"]
+        name = action.payload["name"]
+        categories = state.items.map(a => a.category)
+        index = categories.indexOf(category)
+    }
     switch(action.type){
         case "ALTER_NAME":
             return {
@@ -43,13 +50,6 @@ const shoppingList = (state=initialShoppingList,action) =>{
                 "name": action.payload
             }
         case "ADD_ITEM":
-            category = action.payload["category"]
-            foodItemId = action.payload["foodItemID"]
-            name = action.payload["name"]
-            categories = state.items.map(a => a.category)
-            index = categories.indexOf(category)
-            
-
             if (index > -1){
                 return{
                     ...state,
@@ -63,10 +63,6 @@ const shoppingList = (state=initialShoppingList,action) =>{
                 "items": [...state.items, {category , food : [{name, foodItemId, number: 1}]}]
             }
         case "ITEM_NUMBER_CHANGE":
-            category = action.payload["category"]
-            foodItemId = action.payload["foodItemID"]
-            categories = state.items.map(a => a.category)
-            index = categories.indexOf(category)
             change = action.payload["change"]
             foods = state.items[index].food.map(a => a.foodItemId)
             foodIndex = foods.indexOf(foodItemId)
@@ -86,10 +82,6 @@ const shoppingList = (state=initialShoppingList,action) =>{
                         ...state.items.slice(index + 1)
                 ]}
         case "ITEM_REMOVE":
-            category = action.payload["category"]
-            foodItemId = action.payload["foodItemID"]
-            categories = state.items.map(a => a.category)
-            index = categories.indexOf(category)
             foods = state.items[index].food.map(a => a.foodItemId)
             foodIndex = foods.indexOf(foodItemId)
             foodItem = state.items[index].food[foodIndex]
@@ -143,4 +135,13 @@ const search = (state="", action) =>{
     }
 }
 
-export default combineReducers({edit, sidebar,modal,shoppingList, viewData, dataWatcher, search})
+const categories = (state=[], action) =>{
+    switch(action.type){
+        case "SET_CATEGORIES":
+            return action.payload
+        default:
+            return state
+    }
+}
+
+export default combineReducers({categories, edit, sidebar,modal,shoppingList, viewData, dataWatcher, search})

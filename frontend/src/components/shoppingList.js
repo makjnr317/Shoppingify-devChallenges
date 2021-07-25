@@ -3,7 +3,8 @@ import "./shoppingList.css"
 import sauce from "../images/source.svg"
 import empty from "../images/undraw_shopping_app_flsj 1.svg"
 import {useSelector, useDispatch} from "react-redux"
-import {setEdit ,setInput, toggleModal, alterName, addItem, itemNumberChange,itemRemove} from "../redux/actions"
+import {setEdit ,setInput, toggleModal, alterName, itemNumberChange,itemRemove, clearList} from "../redux/actions"
+import axios from 'axios'
 
 function AddItem(){
     const dispatch = useDispatch()
@@ -29,7 +30,10 @@ function SaveListEdit({empty}){
 	return(
 		<div className="SaveList">
 			<div className={`${(empty)? "border-gray ": ""}ListNameSave`}>
-				<input type="text" placeholder="Enter a name" value={name} onChange={(event) => setname(event.target.value)} disabled={empty}/>
+				<input type="text" placeholder="Enter a name" value={name} onChange={(event) => {
+                    let value = event.target.value
+                    setname(value.charAt(0).toUpperCase() + value.slice(1).toLowerCase())
+                }} disabled={empty}/>
 				<div className={`${(empty)? "button-gray ": ""}SaveListButton`} onClick={() => {dispatch(alterName(name)); setname("")}}>
 					Save
 				</div>
@@ -45,7 +49,6 @@ function ShoppingListItem({index, name ,count, id, category}){
     var dynamicElement = `.modifyCount-${index}`
     var listItemName = `.listItemName-${index}`
     var checkbox = `.checbox-${index}`
-    const _id = id
 
     const handleHover = () =>{ 
         document.querySelector(dynamicElement).style.display = "flex";
@@ -146,11 +149,28 @@ function NonEmptyList({name, items}){
 
 function SaveList(){
     const dispatch = useDispatch()
+    var list = useSelector(state => state.shoppingList)
+
+    const handleClick = () =>{
+        list = {
+            ...list,
+            "status": "Completed"
+        }
+
+        axios({
+            method: "post",
+            url: "http://localhost:7000/api/history",
+            data: list,
+            headers: { "Content-Type": "application/json" },
+        })
+        .then(dispatch(clearList()))
+    }
+
     return(
         <div className="SaveList">
 			<div className="saveButtons">
-				<div className="cancel"  onClick={()=> dispatch(toggleModal())}>cancel</div>
-				<div className="complete">Complete</div>
+				<div className="cancel" onClick={() => dispatch(toggleModal())}>cancel</div>
+				<div className="complete" onClick={handleClick}>Complete</div>
 			</div>
 		</div>
     )

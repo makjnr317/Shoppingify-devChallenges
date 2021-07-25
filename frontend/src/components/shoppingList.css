@@ -206,3 +206,8 @@
     position: relative;
     bottom: -12px;
 }
+
+
+input:disabled{
+    background: white;
+}
