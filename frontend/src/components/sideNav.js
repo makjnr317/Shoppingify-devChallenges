@@ -71,7 +71,7 @@ export default function SideNav() {
             </div>
 
             <div className="cart">
-                {(numberOfItems > 0) && <div className="cart-count"><p>{numberOfItems}</p></div>}
+                <div className={`cart-count${(numberOfItems < 1)? " count-visibilty": ""}`}><p>{numberOfItems}</p></div>
                 <div className="shoppingCart" onClick={()=> dispatch(setShoppingList())}>
                     <span className="material-icons">shopping_cart</span>
                 </div>

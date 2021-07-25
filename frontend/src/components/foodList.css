@@ -43,9 +43,8 @@
     height: max-content;
 }
 
-.noFoodData{
+.noFoodItem{
     grid-row: 2/3;
-    height: 90%;
     display: grid;
     place-content: center;
 }

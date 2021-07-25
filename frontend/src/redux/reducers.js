@@ -134,4 +134,13 @@ const dataWatcher = (state=false, action) => {
     }
 }
 
-export default combineReducers({edit, sidebar,modal,shoppingList, viewData, dataWatcher})
+const search = (state="", action) =>{
+    switch(action.type){
+        case "UPDATE":
+            return action.payload
+        default:
+            return state
+    }
+}
+
+export default combineReducers({edit, sidebar,modal,shoppingList, viewData, dataWatcher, search})

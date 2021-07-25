@@ -54,4 +54,12 @@ export const populate = (id,category) => {
             payload: {id, category}
 }}
 
+
+
+export const setSearch = (search) => {
+    return {
+            type: "UPDATE",
+            payload: search
+}}
+
 export const clearList = (id,category) => {return {type: "CLEAR_LIST"}}

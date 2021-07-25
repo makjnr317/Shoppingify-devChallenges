@@ -29,7 +29,7 @@ function SaveListEdit({empty}){
 	return(
 		<div className="SaveList">
 			<div className={`${(empty)? "border-gray ": ""}ListNameSave`}>
-				<input type="text" placeholder="Enter a name" value={name} onChange={(event) => setname(event.target.value)}/>
+				<input type="text" placeholder="Enter a name" value={name} onChange={(event) => setname(event.target.value)} disabled={empty}/>
 				<div className={`${(empty)? "button-gray ": ""}SaveListButton`} onClick={() => {dispatch(alterName(name)); setname("")}}>
 					Save
 				</div>

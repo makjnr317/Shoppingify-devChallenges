@@ -46,30 +46,64 @@ function FoodItem({text, id, category}) {
 }
 
 function FoodCategory({category,food}){
-	console.log(food)
-	return(
-		<div className="category">
-			<h3>{category}</h3>
-			<div className="food">
-				{food.map((foodItem,i)=> (<FoodItem key={i} text={foodItem.name} id={foodItem._id} category={category}/>))}
+	const search = useSelector(state => state.search)
+	const categoryContains = food.map(x => x.name.toLowerCase().includes(search.toLowerCase().trim()))
+	
+	if (categoryContains.reduce((a,b) => a || b, false)){
+		return(
+			<div className="category">
+				<h3>{category}</h3>
+				<div className="food">
+					{food.map((foodItem,i)=> (categoryContains[i] && <FoodItem key={i} text={foodItem.name} id={foodItem._id} category={category}/>))}
+				</div>
 			</div>
-		</div>
-	)
+		)
+	}
+	else{
+		return (
+			<></>
+		)
+	}
+
+	
 }
  
 
 export default function FoodList(){
 	const dataWatcher = useSelector(state => state.dataWatcher)
 	const [data, setData] = useState([])
+	const search = useSelector(state => state.search)
 
 	useEffect(() => {
 		axios.get("http://localhost:7000/api/fooditems")
 		.then(res => {setData(res.data)})
 	},[dataWatcher])
 
+	var s = ((data.map(x=> x.food.map(x => x.name)).reduce((a, b)=> a + b, []))) + ''
+	s = s.split(",")
+	const searchValid = ((s.map(x=> x.toLowerCase().includes(search.trim().toLowerCase()))).reduce((a,b) => a || b, false))
+
+	if (searchValid){
+		return(
+			<div className="food_list">
+				{data.map((category, i) => ((category.food.length > 0) && <FoodCategory key={i} category={category.category} food={category.food}/> ))}
+			</div>
+		)
+	}
+
+	if (!(search.trim() === "")){
+		return(
+			<div className="noFoodItem">
+				<p>Search invalid. Add new item or make a new search</p>
+			</div>
+		)
+	}
+	
 	return(
-		<div className="food_list">
-			{data.map((category, i) => ((category.food.length > 0) && <FoodCategory key={i} category={category.category} food={category.food}/> ))}
+		<div className="noFoodItem">
+			<p>Nothing to show. Add items to database.</p>
 		</div>
 	)
+	
+	
 }
