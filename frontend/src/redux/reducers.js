@@ -100,7 +100,7 @@ const shoppingList = (state=initialShoppingList,action) =>{
                 ]}
         case "CLEAR_LIST":
             return {
-                "name": state.name,
+                "name": "Shopping List",
                 "items": []
             }
         default:
@@ -144,4 +144,34 @@ const categories = (state=[], action) =>{
     }
 }
 
-export default combineReducers({categories, edit, sidebar,modal,shoppingList, viewData, dataWatcher, search})
+const changeHistory = (state=false, action) =>{
+    switch(action.type){
+        case "CHANGE_HISTORY":
+                return !state
+        default:
+                return state
+    }
+}
+
+
+const toggleHistory = (state=false, action) =>{
+    switch(action.type){
+        case "HISTORY_TOGGLE":
+                return !state
+        case "SET_FALSE":
+            return false
+        default:
+                return state
+    }
+}
+
+const history = (state={}, action) =>{
+    switch(action.type){
+        case "SET_HISTORY":
+                return action.payload
+        default:
+                return state
+    }
+}
+
+export default combineReducers({categories, history,edit, toggleHistory,sidebar,modal,shoppingList, changeHistory,viewData, dataWatcher, search})

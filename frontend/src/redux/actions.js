@@ -64,3 +64,21 @@ export const setCategories = (categories) => {
             type: "SET_CATEGORIES",
             payload: categories
 }}
+
+
+export const historyChange = () => {return {type: "CHANGE_HISTORY"}}
+
+export const historyToggle = () => {return {type: "HISTORY_TOGGLE"}}
+
+export const setFalse = () => {return {type: "SET_FALSE"}}
+
+export const setHistory = (name,date,list) => {
+    return {
+        type: "SET_HISTORY",
+        payload:{
+            name,
+            date,
+            list
+        }
+    }
+}

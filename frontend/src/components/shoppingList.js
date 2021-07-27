@@ -3,7 +3,7 @@ import "./shoppingList.css"
 import sauce from "../images/source.svg"
 import empty from "../images/undraw_shopping_app_flsj 1.svg"
 import {useSelector, useDispatch} from "react-redux"
-import {setEdit ,setInput, toggleModal, alterName, itemNumberChange,itemRemove, clearList} from "../redux/actions"
+import {setEdit ,setInput, toggleModal, alterName, itemNumberChange,itemRemove, clearList, historyChange} from "../redux/actions"
 import axios from 'axios'
 
 function AddItem(){
@@ -163,7 +163,10 @@ function SaveList(){
             data: list,
             headers: { "Content-Type": "application/json" },
         })
-        .then(dispatch(clearList()))
+        .then(() => {
+            dispatch(clearList())
+            dispatch(historyChange())
+        })
     }
 
     return(

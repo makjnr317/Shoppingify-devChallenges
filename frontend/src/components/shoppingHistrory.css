@@ -30,13 +30,20 @@
 }
 
 .tabs{
-    display: grid;
+    display: flex;
     grid-row-gap: 22px;
+    flex-direction: column-reverse;
 }
 
 .monthTabs{
-    display: grid;
+    grid-row: 2/3;
+    display: flex;
     grid-row-gap: 36px;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100% - 100px);
+    flex-direction: column;
 }
 
 .historyTab>div:nth-child(2){
@@ -64,4 +71,8 @@
 .cancelled{
     color:#EB5757 !important;
     border-color:#EB5757 !important;
+}
+
+.monthHistory{
+    padding-right: 20px;
 }

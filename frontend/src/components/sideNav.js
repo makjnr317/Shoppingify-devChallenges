@@ -2,7 +2,7 @@ import React from 'react'
 import logo from "../images/logo.svg" 
 import "./sideNav.css"
 import { useLocation, Link } from 'react-router-dom';
-import { setShoppingList , clearList,setEdit} from '../redux/actions'
+import { setShoppingList , clearList, setEdit , setFalse} from '../redux/actions'
 import { useDispatch , useSelector} from "react-redux"
 
 function MenuItem({icon, title, curIcon}){
@@ -28,7 +28,7 @@ function MenuItem({icon, title, curIcon}){
     return(
         <div className="menu-item" onMouseOver={handleHover} onMouseLeave={handleLeave} onClick={handleClick}>
             <div className={`${icon}-menu-bar menu-bar`} style={{backgroundColor: (curIcon === icon)? "#F9A109" : "white"}}/>
-            <span className={`material-icons icon-${icon}`}>{icon}</span>
+            <span className={`material-icons-outlined icon-${icon}`}>{icon}</span>
             <div className={`title ${icon}-title`}><span className="triangle"></span>{title}</div>
             <div className={`${icon}-placeholder`}/>
         </div>
@@ -61,7 +61,7 @@ export default function SideNav() {
                     <MenuItem icon="list" title="items" curIcon={curIcon}/>
                 </Link>
 
-                <Link to="/history">
+                <Link to="/history" onClick={() => dispatch(setFalse())}>
                     <MenuItem icon="replay" title="history" curIcon={curIcon}/>
                 </Link>
 
@@ -73,7 +73,7 @@ export default function SideNav() {
             <div className="cart">
                 <div className={`cart-count${(numberOfItems < 1)? " count-visibilty": ""}`}><p>{numberOfItems}</p></div>
                 <div className="shoppingCart" onClick={()=> dispatch(setShoppingList())}>
-                    <span className="material-icons">shopping_cart</span>
+                    <span className="material-icons-outlined">shopping_cart</span>
                 </div>
             </div>
         </div>

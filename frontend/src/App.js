@@ -10,8 +10,9 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import {Route, Switch} from 'react-router-dom'
 import ShoppingHistory from "./components/ShopingHistory"
 import Statistics from "./components/statistics"
-import {useSelector} from "react-redux"
+import {useSelector , useDispatch} from "react-redux"
 import { Link } from 'react-router-dom'
+import { historyToggle } from './redux/actions'
 
 
 function SideBar(){
@@ -24,47 +25,44 @@ function SideBar(){
 }
 
 
-function HistoryFoodCategory({category}){
+function HistoryFoodCategory({category, food}){
 	return(
 		<div className="category">
-			<h3>Fruits & Vegetables</h3>
+			<h3>{category}</h3>
 			<div className="food">
-				<FoodItemCount text="Avocadreg erago"/>
-				<FoodItemCount text="Avocado"/>
-				<FoodItemCount text="Avocado"/>
-				<FoodItemCount text="Avocado"/>
-				<FoodItemCount text="Avocado"/>
+				{food.map((foodItem,i)=> (<FoodItemCount key={i} text={foodItem.name} count={foodItem.number}/>))}
 			</div>
 		</div>
 	)
 }
 
-function FoodItemCount({text}) {
+function FoodItemCount({text,count}) {
     return (
         <div className="food_itemCount">
             <p>{text}</p>
-            <p className="itemsCount">3 pcs</p>
+            <p className="itemsCount">{count} pcs</p>
         </div>
     )
 }
 
 function HistoryView(){
+	const dispatch = useDispatch()
+	const history = useSelector(state => state.history)
 	return(
 		<div className="historyView">
 			<Link to="/history">
-				<div className="back">
+				<div className="back" onClick={()=> dispatch((historyToggle()))}>
 					<span className="material-icons">trending_flat</span>
 					<p>back</p>
 				</div>
 			</Link>
-			<h4>Eero’s farewell party</h4>
+			<h4>{history.name}</h4>
 			<div className="date">
 			<span className="material-icons event_note">event_note</span>
-				<p>Mon 27.8.2020</p>
+				<p>{history.date}</p>
 			</div>
 			<div className="monthTabs">
-				<HistoryFoodCategory/>
-				<HistoryFoodCategory/>
+			{history.list.map((category, i) => ((category.food.length > 0) && <HistoryFoodCategory key={i} category={category.category} food={category.food}/> ))}
 			</div>
 		</div>
 	)
@@ -73,6 +71,7 @@ function HistoryView(){
 
 function App() {
 	const modal = useSelector(state => state.modal)
+	const history = useSelector(state => state.toggleHistory)
 
 	return (
 		<>
@@ -84,10 +83,7 @@ function App() {
 						<FoodList/>
 					</Route>
 					<Route path="/history">
-						{/*
-						<HistoryView/>
-						*/}
-						<ShoppingHistory/>
+						{(history) ? <HistoryView/>: <ShoppingHistory/>}
 					</Route>
 					<Route path="/statistics">
 						<Statistics/>
