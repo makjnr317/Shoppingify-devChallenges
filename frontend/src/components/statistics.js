@@ -82,34 +82,26 @@ function TopCategories({data}){
 	)
 }
 
-function Chart(){
+function Chart({stats}){
 
-    const data = [
-        {
-          "id": "items",
-          "color": "hsl(2, 70%, 50%)",
-          "data": [
-            {
-              "x": "January",
-              "y": 100
-            },
-            {
-              "x": "February",
-              "y": 51
-            },
-            {
-              "x": "Februar",
-              "y": 51
-            },
-            {
-              "x": "Februry",
-              "y": 51
-            }
-          ]
-        }
-      ]
+	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-	if (data[0].data.length < 3){
+	var data = {
+		"id": "items",
+		"color": "hsl(2, 70%, 50%)",
+		"data": []
+	}
+
+	for (let i in stats){
+		data = {
+			...data,
+			data : [...data.data, {"x": months[i.substr(5)], "y" : stats[i]}]
+		}
+	}
+
+	data = [data]
+
+	if (data[0].data.length < 2){
 		return(
 			<div className="noChartData">
 				<p>Not enough data to make graph</p>
@@ -149,11 +141,11 @@ function Chart(){
 }
 
 
-function ChartBox(){
+function ChartBox({data}){
 	return(
 		<div className="chartBox">
 			<h6 className="chartHeading">Monthly Summary</h6>
-            <Chart/>
+            <Chart stats={data}/>
 		</div>
 	)
 }

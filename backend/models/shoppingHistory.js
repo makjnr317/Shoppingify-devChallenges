@@ -3,9 +3,7 @@ const {Schema} = require("mongoose")
 
 const ShoppingHistoryModel = new Schema({
     name: String,
-    date : {
-        type: Date, 
-        default: new Date(2021,7,20)},
+    date : {type: Date, default: Date.now},
     status: String,
     items:[{
         category:String,
