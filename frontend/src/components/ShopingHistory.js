@@ -15,10 +15,10 @@ export function StatusBar({status}){
 
 function HistoryTab({name,status, date, items}){
 	const d = new Date(date)
-
 	const dispatch = useDispatch()
 	const days= ["Sun", "Mon", "Tue", "Wed", "Thu","Fri","Sat"]
 	const newDate = days[d.getDay()] + " " + d.getDay() + "." + (parseInt(d.getMonth()) + 1) + "." + d.getFullYear()
+	
 	return(
 		<div className="historyTab"  onClick={()=> {
 			dispatch((historyToggle()))
@@ -62,13 +62,13 @@ export default function ShoppingHistory(){
 		.catch(err => console.log(err))
 	}, [changeHistory])
 
-	const historyMonths = [...(new Set(history.map(x => x.date.substr(0,7))))]
+	const historyMonths = [...(new Set(history.map(x => x.date.substr(0,7))))].reverse()
 
 	var entries, monthf
 	return(
 		<div className="shoppingHistory">
 			<h3 className="shoppingHistoryHeader">Shopping history</h3>
-			<div className="monthTabs  monthTabsHistory">
+			<div className="monthTabs monthTabsHistory">
 				{
 					historyMonths.map((month, i) =>{
 						try{
@@ -79,7 +79,7 @@ export default function ShoppingHistory(){
 							console.log(null)
 							return <></>
 						}
-						return <MonthHistory key={i} month={monthf} entries={entries}/>
+						return <MonthHistory key={i} month={monthf} entries={entries.reverse()}/>
 					})
 						
 				}

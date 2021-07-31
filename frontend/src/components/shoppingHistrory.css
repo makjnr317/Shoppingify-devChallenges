@@ -32,7 +32,7 @@
 .tabs{
     display: flex;
     grid-row-gap: 22px;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .monthTabs{

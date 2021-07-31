@@ -159,7 +159,3 @@ div#root{
 .material-icons {
     user-select: none;
 }
-
-.monthTabsHistory{
-    flex-direction: column-reverse !important;
-}

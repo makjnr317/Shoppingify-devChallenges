@@ -84,6 +84,15 @@ export default function FoodList(){
 	s = s.split(",")
 	const searchValid = ((s.map(x=> x.toLowerCase().includes(search.trim().toLowerCase()))).reduce((a,b) => a || b, false))
 	
+	if (data === undefined){
+		return (
+			<div className="loadingFood">
+				Loading...
+			</div>
+		)
+	}
+
+
 	if (searchValid){
 		return(
 			<div className="food_list">

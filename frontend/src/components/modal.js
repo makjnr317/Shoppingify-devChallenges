@@ -1,7 +1,7 @@
 import React from 'react'
 import "./modal.css"
 import {useDispatch, useSelector} from "react-redux"
-import {toggleModal, clearList, historyChange} from "../redux/actions"
+import {toggleModal, clearList, historyChange,updateStats} from "../redux/actions"
 import axios from 'axios'
 
 export default function Modal(){
@@ -30,6 +30,7 @@ export default function Modal(){
 			dispatch(clearList())
 			dispatch(toggleModal())
 			dispatch(historyChange())
+			dispatch(updateStats())
 		})
     }
 

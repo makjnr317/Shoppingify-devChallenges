@@ -3,7 +3,7 @@ import "./shoppingList.css"
 import sauce from "../images/source.svg"
 import empty from "../images/undraw_shopping_app_flsj 1.svg"
 import {useSelector, useDispatch} from "react-redux"
-import {setEdit ,setInput, toggleModal, alterName, itemNumberChange,itemRemove, clearList, historyChange} from "../redux/actions"
+import {setEdit ,setInput, toggleModal, updateStats ,alterName, itemNumberChange,itemRemove, clearList, historyChange} from "../redux/actions"
 import axios from 'axios'
 
 function AddItem(){
@@ -34,7 +34,15 @@ function SaveListEdit({empty}){
                     let value = event.target.value
                     setname(value.charAt(0).toUpperCase() + value.slice(1).toLowerCase())
                 }} disabled={empty}/>
-				<div className={`${(empty)? "button-gray ": ""}SaveListButton`} onClick={() => {dispatch(alterName(name)); setname("")}}>
+				<div className={`${(empty)? "button-gray ": ""}SaveListButton`} onClick={() => {
+                    console.log(name.trim() === "")
+                    if (name.trim() === ""){
+                        dispatch(alterName("Untitled List"))
+                    }else{
+                        dispatch(alterName(name))
+                    }
+                    setname("")
+                }}>
 					Save
 				</div>
 			</div>
@@ -166,6 +174,7 @@ function SaveList(){
         .then(() => {
             dispatch(clearList())
             dispatch(historyChange())
+            dispatch(updateStats())
         })
     }
 

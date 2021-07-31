@@ -2,7 +2,7 @@ import React from 'react'
 import logo from "../images/logo.svg" 
 import "./sideNav.css"
 import { useLocation, Link } from 'react-router-dom';
-import { setShoppingList , clearList, setEdit , setFalse} from '../redux/actions'
+import { setShoppingList , clearList, setEdit , setFalse, updateStats} from '../redux/actions'
 import { useDispatch , useSelector} from "react-redux"
 
 function MenuItem({icon, title, curIcon}){
@@ -65,7 +65,7 @@ export default function SideNav() {
                     <MenuItem icon="replay" title="history" curIcon={curIcon}/>
                 </Link>
 
-                <Link to="/statistics">
+                <Link to="/statistics" onClick={() => dispatch(updateStats())}>
                     <MenuItem icon="poll" title="statistics" curIcon={curIcon}/>
                 </Link>
             </div>

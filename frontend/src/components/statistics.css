@@ -78,3 +78,9 @@ svg{
     display: grid;
     place-content: center;
 }
+
+.loading{
+    display: grid;
+    place-content: center;
+    height: calc(100% - 64px);
+}

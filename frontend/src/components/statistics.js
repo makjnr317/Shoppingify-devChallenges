@@ -1,46 +1,83 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./statistics.css"
 import { ResponsiveLine } from '@nivo/line'
+import axios from "axios"
+import { useSelector } from 'react-redux'
 
-function StatsRow(){
+function StatsRow({name, value}){
+	const statsStyle ={
+		width: `${value}%`
+	}
+
 	return(
 		<div className="statsRow">
 			<div>
-				<p>Banana</p>
-				<p>20%</p>
+				<p>{name}</p>
+				<p>{value}%</p>
 			</div>
 			<div className="background">
-				<div className="value"></div>
+				<div className="value" style={statsStyle}></div>
 			</div>
 		</div>
 	)
 }
 
 
-function Stats(){
+function Stats({data,total,stats}){
+
+	if (total){
+		return(
+			<div>
+				<StatsRow value={Math.floor(data[stats[0]]/total * 100)} name={stats[0]}/>
+				<StatsRow value={Math.floor(data[stats[1]]/total * 100)}  name={stats[1]}/>
+				<StatsRow value={Math.floor(data[stats[2]]/total * 100)}  name={stats[2]}/>
+			</div>
+		)
+	}
+	
 	return(
-		<div>
-			<StatsRow/>
-			<StatsRow/>
-			<StatsRow/>
+		<div className="loading">
+			Loading...
 		</div>
 	)
 }
 
-function TopItems(){
+function TopItems({data}){
+	var total, stats
+	try{
+		stats = (Object.keys(data).sort(function(a,b){return data[a] - data[b]})).slice(Object.values(data).length - 3).reverse()
+		total = Object.values(data).reduce((a,b) => a + b, 0)
+	}
+	catch{
+		console.log(null)
+	}
+	
+	
 	return(
 		<div className="topItems">
 			<h4 className="statsHeader">Top Items</h4>
-			<Stats/>
+			<Stats data={data} total={total} stats={stats}/>
 		</div>
 	)
+	
+
+	
 }
 
-function TopCategories(){
+function TopCategories({data}){
+	var total, stats
+	try{
+		stats = (Object.keys(data).sort(function(a,b){return data[a] - data[b]})).slice(Object.values(data).length - 3).reverse()
+		total = Object.values(data).reduce((a,b) => a + b, 0)
+	}
+	catch{
+		console.log(null)
+	}
+	
 	return(
 		<div className="topCategories">
 			<h4 className="statsHeader">Top Categories</h4>
-			<Stats/>
+			<Stats data={data} total={total} stats={stats}/>
 		</div>
 	)
 }
@@ -83,7 +120,7 @@ function Chart(){
     return(
         <ResponsiveLine
           data={data}
-          margin={{ top: 50, right: 10, bottom: 50, left: 27 }}
+          margin={{ top: 50, right: 30, bottom: 50, left: 30 }}
           xScale={{ type: 'point' }}
           yScale={{ type: 'linear', min: 0, max: 'auto', stacked: true, reverse: false }}
           axisTop={null}
@@ -122,12 +159,21 @@ function ChartBox(){
 }
 
 export default function Statistics(){
-    
+	const statsUpdate = useSelector(state => state.statsUpdate)
+	const [data, setdata] = useState("")
+
+
+	useEffect(() => {
+		axios.get("http://localhost:7000/api/statistics")
+		.then(res => setdata(res.data))
+		.catch(err => console.log(err))
+	}, [statsUpdate])
+
 	return(
 		<div className="statistics">
-			<TopItems/>
-			<TopCategories/>
-            <ChartBox/>
+			<TopItems data={data.foods}/>
+			<TopCategories data={data.categories}/>
+            <ChartBox data={data.months}/>
 		</div>
 	)
 }

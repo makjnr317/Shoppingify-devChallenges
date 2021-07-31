@@ -82,3 +82,6 @@ export const setHistory = (name,date,list) => {
         }
     }
 }
+
+
+export const updateStats = () => {return {type: "UPDATE_STATS"}}

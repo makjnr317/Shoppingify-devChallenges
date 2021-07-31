@@ -174,4 +174,13 @@ const history = (state={}, action) =>{
     }
 }
 
-export default combineReducers({categories, history,edit, toggleHistory,sidebar,modal,shoppingList, changeHistory,viewData, dataWatcher, search})
+const statisticsController = (state=false, action) =>{
+    switch(action.type){
+        case "UPDATE_STATS":
+            return !state
+        default:
+            return state
+    }
+}
+
+export default combineReducers({statisticsController,categories, history,edit, toggleHistory,sidebar,modal,shoppingList, changeHistory,viewData, dataWatcher, search})

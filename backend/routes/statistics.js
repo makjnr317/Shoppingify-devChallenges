@@ -36,7 +36,7 @@ router.get("/",(req,res)=>{
                 })
             });
         });
-        console.log({foods,categories,months})
+        res.json({foods,categories,months})
     })
     .catch(err => console.log(err))
 })
