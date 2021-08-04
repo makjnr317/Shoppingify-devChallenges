@@ -159,3 +159,44 @@ div#root{
 .material-icons {
     user-select: none;
 }
+
+
+@media (max-width: 1200px){
+    #root{
+        grid-template: 103px calc(100% - 148px) /61px minmax(100px,auto) !important;
+        padding-right: 7px !important;
+    }
+
+    .side_bar{
+        display: none;
+    }
+
+    .statistics{
+        padding-right: 35px;
+    }
+}
+
+
+
+@media (max-width: 792px){
+    #root{
+        padding-right: 25px;
+        grid-column-gap: 25px !important;
+    }
+
+    .category{
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+}
+
+@media (max-width: 538px){
+    #root{
+        padding-right: 0;
+        grid-column-gap: 12px !important;
+    }    
+}
+
+
