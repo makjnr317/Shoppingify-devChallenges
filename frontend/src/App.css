@@ -216,7 +216,10 @@ div#root{
     .shoppingHistory{
         padding-left: 25px;
     }
-
+    .statistics{
+        padding-left: 40px;
+        grid-column-gap: 40px !important;
+    }
     #root{
         padding-right: 25px;
         grid-column-gap: 0 !important;
@@ -269,6 +272,24 @@ div#root{
     .historyTab > div:nth-child(2) {
         display: flex !important;
         width: 228px !important;
+    }
+
+    .statistics{
+        grid-row: 1/3;
+        display: flex !important;
+        grid-row-gap: 33px !important;
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .topCategories .statsHeader{
+        margin-top: 0;
+    }
+
+    .statsHeader, .chartHeading{
+        font-size: 20px !important;
     }
 }
 
@@ -365,6 +386,10 @@ div#root{
 
     .SaveList{
         padding:17px 9px !important; 
+    }
+
+    .statistics{
+        padding: 0 12px !important;
     }
 }
 
