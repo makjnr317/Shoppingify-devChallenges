@@ -17,9 +17,19 @@ import { historyToggle } from './redux/actions'
 
 function SideBar(){
 	const sideVIew = useSelector(state => state.sidebar)
+
+	const handleCLick = (event) =>{
+		if (event.target === document.querySelector(".sideBarClose")){
+			document.querySelector(".side_bar").style.display = "none";
+			document.querySelector(".sideBarClose").style.display = "none";
+		}
+	}
+
 	return(
-		<div className="side_bar">
-			{(sideVIew === "ShoppingList")? <ShoppingList/> :(sideVIew === "Input")? <Input/>: <ViewDetails/>}
+		<div className="sideBarClose" onClick={(event) => handleCLick(event)}>
+			<div className="side_bar">
+				{(sideVIew === "ShoppingList")? <ShoppingList/> :(sideVIew === "Input")? <Input/>: <ViewDetails/>}
+			</div>
 		</div>
 	)
 }
@@ -50,16 +60,18 @@ function HistoryView(){
 	const history = useSelector(state => state.history)
 	return(
 		<div className="historyView">
-			<Link to="/history">
-				<div className="back" onClick={()=> dispatch((historyToggle()))}>
-					<span className="material-icons">trending_flat</span>
-					<p>back</p>
+			<div className="historyViewHeader">
+				<Link to="/history">
+					<div className="back" onClick={()=> dispatch((historyToggle()))}>
+						<span className="material-icons">trending_flat</span>
+						<p>back</p>
+					</div>
+				</Link>
+				<h4>{history.name}</h4>
+				<div className="date">
+					<span className="material-icons event_note">event_note</span>
+					<p>{history.date}</p>
 				</div>
-			</Link>
-			<h4>{history.name}</h4>
-			<div className="date">
-			<span className="material-icons event_note">event_note</span>
-				<p>{history.date}</p>
 			</div>
 			<div className="monthTabs">
 			{history.list.map((category, i) => ((category.food.length > 0) && <HistoryFoodCategory key={i} category={category.category} food={category.food}/> ))}

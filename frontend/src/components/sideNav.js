@@ -48,6 +48,24 @@ export default function SideNav() {
         dispatch(setEdit())
     }
 
+    function getWidth() {
+        return Math.max(
+          document.body.scrollWidth,
+          document.documentElement.scrollWidth,
+          document.body.offsetWidth,
+          document.documentElement.offsetWidth,
+          document.documentElement.clientWidth
+        );
+      }
+
+    const handleClick = () =>{
+        dispatch(setShoppingList())
+        if (getWidth() < 1167){
+            document.querySelector(".side_bar").style.display = "flex";
+            document.querySelector(".sideBarClose").style.display = "flex";
+        }
+    }
+
     let curIcon = (location === "/")? "list" : (location  === "/history")? "replay" : "poll"
     
     return (
@@ -70,9 +88,9 @@ export default function SideNav() {
                 </Link>
             </div>
 
-            <div className="cart">
+            <div className="cart"  onClick={handleClick}>
                 <div className={`cart-count${(numberOfItems < 1)? " count-visibilty": ""}`}><p>{numberOfItems}</p></div>
-                <div className="shoppingCart" onClick={()=> dispatch(setShoppingList())}>
+                <div className="shoppingCart">
                     <span className="material-icons-outlined">shopping_cart</span>
                 </div>
             </div>
